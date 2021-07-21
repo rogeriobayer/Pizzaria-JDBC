@@ -1,4 +1,4 @@
-package pizzaria.objetos;
+package pizzaria.model;
 
 public class Pizza {
     

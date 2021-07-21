@@ -12,14 +12,14 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.table.DefaultTableModel;
-import pizzaria.objetos.Circulo;
-import pizzaria.objetos.Cliente;
-import pizzaria.objetos.Forma;
-import pizzaria.objetos.Pedido;
-import pizzaria.objetos.Pizza;
-import pizzaria.objetos.Quadrado;
-import pizzaria.objetos.SaborPizza;
-import pizzaria.objetos.Triangulo;
+import pizzaria.model.Circulo;
+import pizzaria.model.Cliente;
+import pizzaria.model.Forma;
+import pizzaria.model.Pedido;
+import pizzaria.model.Pizza;
+import pizzaria.model.Quadrado;
+import pizzaria.model.SaborPizza;
+import pizzaria.model.Triangulo;
 import pizzaria.utils.FormaPizzaEnum;
 import pizzaria.utils.TiposPizza;
 
@@ -33,18 +33,18 @@ public class TelaNovoPedido extends javax.swing.JFrame {
     Pedido clientePedido;
     Cliente clienteSelecionado;
     String modo;
-    
+
     public TelaNovoPedido(Cliente cliente) {
-        
+
         clienteSelecionado = cliente;
         clientePedido = cliente.getPedido();
         listaPizzas = new ArrayList();
-        
+
         initComponents();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         btn_pedido_excluir.setEnabled(false);
-        
+
         for (int i = 0; i < TiposPizza.pizzaSimples.getListaSabores().size(); i++) {
             cbx_pedido_sabor1.addItem(TiposPizza.pizzaSimples.getListaSabores().get(i));
             cbx_pedido_sabor2.addItem(TiposPizza.pizzaSimples.getListaSabores().get(i));
@@ -57,62 +57,61 @@ public class TelaNovoPedido extends javax.swing.JFrame {
             cbx_pedido_sabor1.addItem(TiposPizza.pizzaPremium.getListaSabores().get(i));
             cbx_pedido_sabor2.addItem(TiposPizza.pizzaPremium.getListaSabores().get(i));
         }
-        
+
         cbx_pedido_sabor1.setRenderer(new MyObjectListCellRenderer());
         cbx_pedido_sabor2.setRenderer(new MyObjectListCellRenderer());
-        
+
         if (clientePedido != null) {
-           listaPizzas.addAll(clientePedido.getListaPizzas());
-           loadTablePizzas();
-           label_preco_total.setText(String.valueOf(clientePedido.getPreco()));
+            listaPizzas.addAll(clientePedido.getListaPizzas());
+            loadTablePizzas();
+            label_preco_total.setText(String.valueOf(clientePedido.getPreco()));
         }
     }
 
     private TelaNovoPedido() {
     }
-    
+
     public void loadTablePizzas() {
         Object colunas[] = {"Sabor 1", "Sabor 2", "Forma", "Área", "Lado ou Raio", "Preço"};
         DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
-        
+
         for (int i = 0; i < listaPizzas.size(); i++) {
-            Object dados[] = new Object[] {
+            Object dados[] = new Object[]{
                 listaPizzas.get(i).getSabor1().getNome(),
                 listaPizzas.get(i).getSabor2().getNome(),
                 listaPizzas.get(i).getForma().getNomeForma(),
                 listaPizzas.get(i).getArea(),
                 listaPizzas.get(i).getLadoOuRaio(),
-                listaPizzas.get(i).getPrecoTotal(),
-            };
+                listaPizzas.get(i).getPrecoTotal(),};
             modelo.addRow(dados);
         }
         tb_pizzas.setModel(modelo);
         tb_pizzas.setDefaultEditor(Object.class, null);
-        
+
         tb_pizzas.getColumnModel().getColumn(0).setPreferredWidth(100);
         tb_pizzas.getColumnModel().getColumn(1).setPreferredWidth(150);
         tb_pizzas.getColumnModel().getColumn(2).setPreferredWidth(100);
         tb_pizzas.getColumnModel().getColumn(3).setPreferredWidth(100);
         tb_pizzas.getColumnModel().getColumn(4).setPreferredWidth(100);
         tb_pizzas.getColumnModel().getColumn(5).setPreferredWidth(100);
-        
+
     }
-    
+
     public class MyObjectListCellRenderer extends DefaultListCellRenderer {
 
-    public Component getListCellRendererComponent(
-                                   JList list,
-                                   Object value,
-                                   int index,
-                                   boolean isSelected,
-                                   boolean cellHasFocus) {
-        if (value instanceof SaborPizza) {
-            value = ((SaborPizza)value).getNome() + " - " + ((SaborPizza)value).getTipo().getNome();
+        public Component getListCellRendererComponent(
+                JList list,
+                Object value,
+                int index,
+                boolean isSelected,
+                boolean cellHasFocus) {
+            if (value instanceof SaborPizza) {
+                value = ((SaborPizza) value).getNome() + " - " + ((SaborPizza) value).getTipo().getNome();
+            }
+            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            return this;
         }
-        super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-        return this;
     }
-}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -380,12 +379,12 @@ public class TelaNovoPedido extends javax.swing.JFrame {
         boolean isMetricaCmQuadrado;
         SaborPizza sabor1 = (SaborPizza) cbx_pedido_sabor1.getSelectedItem();
         SaborPizza sabor2 = (SaborPizza) cbx_pedido_sabor2.getSelectedItem();
-        
+
         if (sabor1 == null || sabor2 == null) {
             showMessageDialog(null, "Defina os sabores da pizza!");
             return;
         }
-        
+
         if (r_pedido_circulo.isSelected()) {
             forma = new Circulo();
         } else if (r_pedido_quadrado.isSelected()) {
@@ -396,7 +395,7 @@ public class TelaNovoPedido extends javax.swing.JFrame {
             showMessageDialog(null, "Defina o formato da pizza!");
             return;
         }
-        
+
         if (r_pedido_cm.isSelected()) {
             isMetricaCmQuadrado = false;
         } else if (r_pedido_cm_quadrados.isSelected()) {
@@ -405,14 +404,14 @@ public class TelaNovoPedido extends javax.swing.JFrame {
             showMessageDialog(null, "Defina a metrica a ser utilizada!");
             return;
         }
-        
+
         double precoSabor1 = sabor1.getTipo().getPrecoCmQuadrado();
         double precoSabor2 = sabor2.getTipo().getPrecoCmQuadrado();
         if (precoSabor1 == 0 || precoSabor2 == 0) {
             showMessageDialog(null, "Defina o preço do tipo das pizzas selecionadas!");
             return;
         }
-        
+
         double tamanhoInformado;
         try {
             tamanhoInformado = Double.parseDouble(c_pedido_tamanho.getText());
@@ -424,7 +423,7 @@ public class TelaNovoPedido extends javax.swing.JFrame {
         double precoPizza;
         double ladoOuRaio;
         double areaTotal;
-        
+
         if (isMetricaCmQuadrado) {
             areaTotal = tamanhoInformado;
             ladoOuRaio = forma.calcularLadoOuRaio(areaTotal);
@@ -432,7 +431,7 @@ public class TelaNovoPedido extends javax.swing.JFrame {
             ladoOuRaio = tamanhoInformado;
             areaTotal = forma.calcularArea(ladoOuRaio);
         }
-        
+
         if (forma.getForma() == FormaPizzaEnum.QUADRADO && (ladoOuRaio < 10 || ladoOuRaio > 40) && !isMetricaCmQuadrado) {
             showMessageDialog(null, "O tamanho do lado para pizzas quadradas é de no mínimo 10cm e no máximo 40cm");
             return;
@@ -448,7 +447,7 @@ public class TelaNovoPedido extends javax.swing.JFrame {
         }
 
         precoPizza = ((areaTotal * precoSabor1) + (areaTotal * precoSabor2)) / 2;
-        
+
         if (clientePedido == null) {
             clientePedido = new Pedido(clienteSelecionado);
             clienteSelecionado.setPedido(clientePedido);
@@ -457,7 +456,7 @@ public class TelaNovoPedido extends javax.swing.JFrame {
         Pizza novaPizza = new Pizza(clientePedido, forma, isMetricaCmQuadrado, areaTotal, ladoOuRaio, sabor1, sabor2, precoPizza);
         listaPizzas.add(novaPizza);
         clientePedido.addPizza(novaPizza);
-        clientePedido.setPreco(clientePedido.getPreco()+precoPizza);
+        clientePedido.setPreco(clientePedido.getPreco() + precoPizza);
         label_preco_total.setText(String.valueOf(clientePedido.getPreco()));
         loadTablePizzas();
     }//GEN-LAST:event_btn_pedido_salvarActionPerformed
@@ -470,7 +469,7 @@ public class TelaNovoPedido extends javax.swing.JFrame {
         int index = tb_pizzas.getSelectedRow();
         if (index >= 0 && index < listaPizzas.size()) {
             Pizza pizzaParaExcluir = listaPizzas.get(index);
-            clientePedido.setPreco(clientePedido.getPreco()-pizzaParaExcluir.getPrecoTotal());
+            clientePedido.setPreco(clientePedido.getPreco() - pizzaParaExcluir.getPrecoTotal());
             label_preco_total.setText(String.valueOf(clientePedido.getPreco()));
             listaPizzas.remove(index);
             clientePedido.removePizza(index);
@@ -493,7 +492,7 @@ public class TelaNovoPedido extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

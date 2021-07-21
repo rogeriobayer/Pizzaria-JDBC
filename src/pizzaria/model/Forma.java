@@ -1,4 +1,4 @@
-package pizzaria.objetos;
+package pizzaria.model;
 
 public abstract class Forma {
     

@@ -1,6 +1,6 @@
 package pizzaria.utils;
 
-import pizzaria.objetos.TipoPizza;
+import pizzaria.model.TipoPizza;
 
 public class TiposPizza {
     

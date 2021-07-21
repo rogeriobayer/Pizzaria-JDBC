@@ -1,4 +1,4 @@
-package pizzaria.objetos;
+package pizzaria.model;
 
 import java.util.ArrayList;
 

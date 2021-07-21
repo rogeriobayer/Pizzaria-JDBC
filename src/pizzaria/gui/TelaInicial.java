@@ -13,9 +13,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-import pizzaria.objetos.Cliente;
-import pizzaria.objetos.Pedido;
-import pizzaria.objetos.SaborPizza;
+import pizzaria.model.Cliente;
+import pizzaria.model.Pedido;
+import pizzaria.model.SaborPizza;
 import pizzaria.utils.EstadosEnum;
 import pizzaria.utils.TiposPizza;
 
@@ -27,9 +27,9 @@ public class TelaInicial extends javax.swing.JFrame {
 
     ArrayList<Cliente> listaClientes;
     ArrayList<SaborPizza> listaSabores;
-    
+
     String modo;
-    
+
     public TelaInicial() {
         initComponents();
         setLocationRelativeTo(null);
@@ -39,47 +39,44 @@ public class TelaInicial extends javax.swing.JFrame {
         modo = "Navegar";
         manipulaInterface();
         btn_sabor_excluir.setEnabled(false);
-        
+
         tabs.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
-                if(tabs.getSelectedIndex()==3)
-                {
+                if (tabs.getSelectedIndex() == 3) {
                     loadTablePedidos();
                 }
             }
         });
     }
-    
-    
-        
+
     public void loadTableClientes() {
         Object colunas[] = {"Nome", "Sobrenome", "Telefone"};
         DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
-        
+
         for (int i = 0; i < listaClientes.size(); i++) {
-            Object dados[] = new Object[] {
+            Object dados[] = new Object[]{
                 listaClientes.get(i).getNome(),
                 listaClientes.get(i).getSobrenome(),
                 listaClientes.get(i).getTelefone()
             };
             modelo.addRow(dados);
         }
-        
+
         tb_clientes.setModel(modelo);
         tb_clientes.setDefaultEditor(Object.class, null);
-        
+
         tb_clientes.getColumnModel().getColumn(0).setPreferredWidth(100);
         tb_clientes.getColumnModel().getColumn(1).setPreferredWidth(150);
         tb_clientes.getColumnModel().getColumn(2).setPreferredWidth(100);
     }
-    
+
     public void loadTablePedidos() {
-        Object colunas[] = {"Id", "Telefone","Preco", "Estado"};
+        Object colunas[] = {"Id", "Telefone", "Preco", "Estado"};
         DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
         btn_pedidos_salvar.setEnabled(false);
-        
+
         for (int i = 0; i < listaClientes.size(); i++) {
-            
+
             Pedido pedido = listaClientes.get(i).getPedido();
             if (pedido != null) {
                 String estadoPedido;
@@ -96,25 +93,24 @@ public class TelaInicial extends javax.swing.JFrame {
                     default:
                         estadoPedido = "Aberto";
                 }
-                
-                Object dados[] = new Object[] {
+
+                Object dados[] = new Object[]{
                     pedido.getId(),
                     pedido.getCliente().getTelefone(),
                     pedido.getPreco(),
-                    estadoPedido,
-                };
-                
+                    estadoPedido,};
+
                 modelo.addRow(dados);
             }
         }
         tb_pedidos.setModel(modelo);
         tb_pedidos.setDefaultEditor(Object.class, null);
-        
+
         tb_pedidos.getColumnModel().getColumn(0).setPreferredWidth(50);
         tb_pedidos.getColumnModel().getColumn(1).setPreferredWidth(100);
         tb_pedidos.getColumnModel().getColumn(2).setPreferredWidth(50);
         tb_pedidos.getColumnModel().getColumn(3).setPreferredWidth(100);
-        
+
         if (listaClientes.size() == 0) {
             c_pedidos_id.setText("");
             c_pedidos_telefone.setText("");
@@ -122,27 +118,26 @@ public class TelaInicial extends javax.swing.JFrame {
             cbx_pedidos_estado.getModel().setSelectedItem("Aberto");
         }
     }
-    
+
     public void loadTableSabores() {
         Object colunas[] = {"Sabor", "Tipo", "ID"};
         DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
-        
+
         for (int i = 0; i < listaSabores.size(); i++) {
-            Object dados[] = new Object[] {
+            Object dados[] = new Object[]{
                 listaSabores.get(i).getNome(),
                 listaSabores.get(i).getTipo().getNome(),
-                listaSabores.get(i).getId(),
-            };
+                listaSabores.get(i).getId(),};
             modelo.addRow(dados);
         }
         tb_sabores.setModel(modelo);
         tb_sabores.setDefaultEditor(Object.class, null);
-        
+
         tb_sabores.getColumnModel().getColumn(0).setPreferredWidth(150);
         tb_sabores.getColumnModel().getColumn(1).setPreferredWidth(100);
         tb_sabores.getColumnModel().getColumn(2).setPreferredWidth(50);
     }
-    
+
     public void manipulaInterface() {
         switch (modo) {
             case "Navegar":
@@ -159,12 +154,12 @@ public class TelaInicial extends javax.swing.JFrame {
                 btn_cliente_excluir.setEnabled(false);
                 btn_cliente_pedido.setEnabled(false);
                 break;
-            
+
             case "Novo":
                 c_cliente_nome.setText("");
                 c_cliente_sobrenome.setText("");
                 c_cliente_telefone.setText("");
-                
+
                 btn_cliente_salvar.setEnabled(true);
                 btn_cliente_cancelar.setEnabled(true);
                 c_cliente_nome.setEnabled(true);
@@ -175,7 +170,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 btn_cliente_excluir.setEnabled(false);
                 btn_cliente_pedido.setEnabled(false);
                 break;
-            
+
             case "Editar":
                 btn_cliente_salvar.setEnabled(true);
                 btn_cliente_cancelar.setEnabled(true);
@@ -187,7 +182,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 btn_cliente_excluir.setEnabled(false);
                 btn_cliente_pedido.setEnabled(false);
                 break;
-            
+
             case "Selecao":
                 btn_cliente_salvar.setEnabled(false);
                 btn_cliente_cancelar.setEnabled(false);
@@ -201,7 +196,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 break;
         }
     }
-    
+
     public boolean validaTelefone(String telefone) {
         if (telefone.matches("[0-9]+") && telefone.length() > 9 && telefone.length() < 12) {
             return true;
@@ -459,7 +454,7 @@ public class TelaInicial extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btn_cliente_excluir, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_cliente_pedido, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 46, Short.MAX_VALUE))
+                        .addGap(0, 55, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -613,7 +608,7 @@ public class TelaInicial extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_sabor_excluir)
                 .addGap(18, 18, 18)
@@ -863,7 +858,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
 
         tabs.addTab("Pedidos", jPanel7);
@@ -921,7 +916,7 @@ public class TelaInicial extends javax.swing.JFrame {
         String nome = c_cliente_nome.getText();
         String sobrenome = c_cliente_sobrenome.getText();
         String telefone = c_cliente_telefone.getText();
-        
+
         if (!nome.isEmpty() && !sobrenome.isEmpty() && !telefone.isEmpty()) {
             if (validaTelefone(telefone)) {
                 if (modo.equals("Novo")) {
@@ -965,7 +960,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cliente_pedidoActionPerformed
 
     private void c_filtrar_clienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_c_filtrar_clienteKeyReleased
-        DefaultTableModel tabela = (DefaultTableModel)tb_clientes.getModel();
+        DefaultTableModel tabela = (DefaultTableModel) tb_clientes.getModel();
         String pesquisa = c_filtrar_cliente.getText();
         TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(tabela);
         tb_clientes.setRowSorter(tr);
@@ -983,28 +978,28 @@ public class TelaInicial extends javax.swing.JFrame {
     private void btn_sabor_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sabor_salvarActionPerformed
         String nomeSabor = c_sabor_nome.getText();
         SaborPizza saborPizza;
-        
+
         if (nomeSabor.isEmpty()) {
             showMessageDialog(null, "O nome do sabor precisa ser preenchido!");
         } else if (nomeSabor.matches("[0-9]+")) {
             showMessageDialog(null, "O nome do sabor não pode conter números!");
         } else {
             switch (cbx_tipo_sabor.getSelectedItem().toString()) {
-            case "Simples":
-                saborPizza = new SaborPizza(nomeSabor, TiposPizza.pizzaSimples);
-                TiposPizza.pizzaSimples.adicionarSabor(saborPizza);
-                listaSabores.add(saborPizza);
-                break;
-            case "Especial":
-                saborPizza = new SaborPizza(nomeSabor, TiposPizza.pizzaEspecial);
-                TiposPizza.pizzaEspecial.adicionarSabor(saborPizza);
-                listaSabores.add(saborPizza);
-                break;
-            case "Premium":
-                saborPizza = new SaborPizza(nomeSabor, TiposPizza.pizzaPremium);
-                TiposPizza.pizzaPremium.adicionarSabor(saborPizza);
-                listaSabores.add(saborPizza);
-                break;
+                case "Simples":
+                    saborPizza = new SaborPizza(nomeSabor, TiposPizza.pizzaSimples);
+                    TiposPizza.pizzaSimples.adicionarSabor(saborPizza);
+                    listaSabores.add(saborPizza);
+                    break;
+                case "Especial":
+                    saborPizza = new SaborPizza(nomeSabor, TiposPizza.pizzaEspecial);
+                    TiposPizza.pizzaEspecial.adicionarSabor(saborPizza);
+                    listaSabores.add(saborPizza);
+                    break;
+                case "Premium":
+                    saborPizza = new SaborPizza(nomeSabor, TiposPizza.pizzaPremium);
+                    TiposPizza.pizzaPremium.adicionarSabor(saborPizza);
+                    listaSabores.add(saborPizza);
+                    break;
             }
             loadTableSabores();
             c_sabor_nome.setText("");
@@ -1018,15 +1013,15 @@ public class TelaInicial extends javax.swing.JFrame {
         if (index >= 0 && index < listaSabores.size()) {
             listaSabores.remove(index);
             switch (tipoSabor) {
-            case "Simples":
-                TiposPizza.pizzaSimples.removerSabor(idSabor);
-                break;
-            case "Especial":
-                TiposPizza.pizzaEspecial.removerSabor(idSabor);
-                break;
-            case "Premium":
-                TiposPizza.pizzaPremium.removerSabor(idSabor);
-                break;
+                case "Simples":
+                    TiposPizza.pizzaSimples.removerSabor(idSabor);
+                    break;
+                case "Especial":
+                    TiposPizza.pizzaEspecial.removerSabor(idSabor);
+                    break;
+                case "Premium":
+                    TiposPizza.pizzaPremium.removerSabor(idSabor);
+                    break;
             }
         }
         loadTableSabores();
@@ -1043,14 +1038,14 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void btn_preco_simples_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_preco_simples_salvarActionPerformed
         double precoSimples;
-        
+
         try {
             precoSimples = Double.parseDouble(c_preco_simples.getText());
         } catch (Exception e) {
             showMessageDialog(null, "Valor inválido!");
             return;
         }
-        
+
         TiposPizza.pizzaSimples.setPrecoCmQuadrado(precoSimples);
         showMessageDialog(null, "Sucesso!");
     }//GEN-LAST:event_btn_preco_simples_salvarActionPerformed
@@ -1061,28 +1056,28 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void btn_preco_especial_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_preco_especial_salvarActionPerformed
         double precoEspecial;
-        
+
         try {
             precoEspecial = Double.parseDouble(c_preco_especial.getText());
         } catch (Exception e) {
             showMessageDialog(null, "Valor inválido!");
             return;
         }
-        
+
         TiposPizza.pizzaEspecial.setPrecoCmQuadrado(precoEspecial);
         showMessageDialog(null, "Sucesso!");
     }//GEN-LAST:event_btn_preco_especial_salvarActionPerformed
 
     private void btn_preco_premium_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_preco_premium_salvarActionPerformed
         double precoPremium;
-        
+
         try {
             precoPremium = Double.parseDouble(c_preco_premium.getText());
         } catch (Exception e) {
             showMessageDialog(null, "Valor inválido!");
             return;
         }
-        
+
         TiposPizza.pizzaPremium.setPrecoCmQuadrado(precoPremium);
         showMessageDialog(null, "Sucesso!");
     }//GEN-LAST:event_btn_preco_premium_salvarActionPerformed
@@ -1101,7 +1096,7 @@ public class TelaInicial extends javax.swing.JFrame {
         String telefone = tb_pedidos.getValueAt(index, 1).toString();
         String preco = tb_pedidos.getValueAt(index, 2).toString();
         String estado = tb_pedidos.getValueAt(index, 3).toString();
-        
+
         if (index >= 0) {
             c_pedidos_id.setText(id);
             c_pedidos_telefone.setText(telefone);
@@ -1129,17 +1124,17 @@ public class TelaInicial extends javax.swing.JFrame {
 
             switch (cbx_pedidos_estado.getSelectedItem().toString()) {
                 case "Aberto":
-                estadoNum = EstadosEnum.ABERTO;
-                break;
+                    estadoNum = EstadosEnum.ABERTO;
+                    break;
                 case "A caminho":
-                estadoNum = EstadosEnum.A_CAMINHO;
-                break;
+                    estadoNum = EstadosEnum.A_CAMINHO;
+                    break;
                 case "Entregue":
-                estadoNum = EstadosEnum.ENTREGUE;
-                break;
+                    estadoNum = EstadosEnum.ENTREGUE;
+                    break;
                 default:
-                estadoNum = EstadosEnum.ABERTO;
-                break;
+                    estadoNum = EstadosEnum.ABERTO;
+                    break;
             }
 
             for (int i = 0; i < listaClientes.size(); i++) {
@@ -1167,7 +1162,7 @@ public class TelaInicial extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

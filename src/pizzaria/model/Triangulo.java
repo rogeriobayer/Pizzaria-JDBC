@@ -1,4 +1,4 @@
-package pizzaria.objetos;
+package pizzaria.model;
 
 import pizzaria.utils.FormaPizzaEnum;
 
