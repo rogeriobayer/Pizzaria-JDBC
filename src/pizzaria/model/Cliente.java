@@ -1,24 +1,55 @@
 package pizzaria.model;
 
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Cliente {
-    
+
+    private String id;
     private String nome;
     private String sobrenome;
     private String telefone;
+    private Array pedidoLista;
+
     private Pedido pedidoCliente;
-    
+
     public Cliente() {
     }
 
     public Cliente(String nome, String sobrenome, String telefone) {
+        this.id = UUID.randomUUID().toString();
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.telefone = telefone;
         this.pedidoCliente = pedidoCliente;
     }
-    
+
+    public Cliente(String id, String nome, String sobrenome, String telefone, Array pedidoLista) {
+        this.id = id;
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.telefone = telefone;
+        this.pedidoCliente = pedidoCliente;
+        this.pedidoLista = pedidoLista;
+    }
+
+    public Array getArray() {
+        return pedidoLista;
+    }
+
+    public void setArray(Array pedidoLista) {
+        this.pedidoLista = pedidoLista;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -42,7 +73,7 @@ public class Cliente {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-    
+
     public Pedido getPedido() {
         return pedidoCliente;
     }
