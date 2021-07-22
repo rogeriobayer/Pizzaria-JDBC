@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package pizzaria.gui;
+package pizzaria.view;
 
 import java.util.ArrayList;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -19,10 +14,6 @@ import pizzaria.model.SaborPizza;
 import pizzaria.utils.EstadosEnum;
 import pizzaria.utils.TiposPizza;
 
-/**
- *
- * @author leo_o
- */
 public class TelaInicial extends javax.swing.JFrame {
 
     ArrayList<Cliente> listaClientes;

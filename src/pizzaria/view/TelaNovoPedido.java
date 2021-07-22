@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package pizzaria.gui;
+package pizzaria.view;
 
 import java.awt.Component;
 import java.util.ArrayList;
@@ -23,10 +18,6 @@ import pizzaria.model.Triangulo;
 import pizzaria.utils.FormaPizzaEnum;
 import pizzaria.utils.TiposPizza;
 
-/**
- *
- * @author leo_o
- */
 public class TelaNovoPedido extends javax.swing.JFrame {
 
     ArrayList<Pizza> listaPizzas;
@@ -347,7 +338,7 @@ public class TelaNovoPedido extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 525, Short.MAX_VALUE)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
         );
 
         pack();
