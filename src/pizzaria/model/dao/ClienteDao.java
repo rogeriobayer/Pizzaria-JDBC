@@ -14,9 +14,9 @@ public class ClienteDao {
 // a conexão com o banco de dados
 
     private ConnectionFactory connectionFactory;
-    private final String insert = "insert into clientes (nome,email,endereco,dataNascimento) values (?,?,?,?)";
+    private final String insert = "insert into clientes (id, nome,sobrenome,telefone) values (?,?,?,?)";
     private final String select = "select * from clientes";
-    private final String update = "update clientes set nome=?, email=?, endereco=?, dataNascimento=? WHERE id=?";
+    private final String update = "update clientes set nome=?, telefone=?, sobrenome=?WHERE id=?";
     private final String delete = "delete from clientes WHERE id=?";
 
     public ClienteDao(ConnectionFactory conFactory) {
@@ -29,10 +29,11 @@ public class ClienteDao {
             // prepared statement para inserção
             PreparedStatement stmtAdiciona = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             // seta os valores
-            stmtAdiciona.setString(1, cliente.getNome());
-            stmtAdiciona.setString(2, cliente.getSobrenome());
-            stmtAdiciona.setString(3, cliente.getTelefone());
-            stmtAdiciona.setArray(4, cliente.getArray());
+            stmtAdiciona.setString(1, cliente.getId());
+            stmtAdiciona.setString(2, cliente.getNome());
+            stmtAdiciona.setString(3, cliente.getSobrenome());
+            stmtAdiciona.setString(4, cliente.getTelefone());
+//            stmtAdiciona.setArray(5, cliente.getArray());
             // executa
             stmtAdiciona.execute();
             //Seta o id do cliente
@@ -61,10 +62,10 @@ public class ClienteDao {
                 String sobrenome = rs.getString("sobrenome");
                 String telefone = rs.getString("telefone");
 //                LocalDate dataNascimento = rs.getDate("dataNascimento").toLocalDate();
-                Array pedidosArray = rs.getArray("pedidosArray");
+//                Array pedidosArray = rs.getArray("pedidosArray");
 
                 // adicionando o objeto à lista
-                clientes.add(new Cliente(id, nome, sobrenome, telefone, pedidosArray));
+                clientes.add(new Cliente(id, nome, sobrenome, telefone));
             }
 
             return clientes;
@@ -86,7 +87,7 @@ public class ClienteDao {
             stmtAtualiza.setString(2, cliente.getNome());
             stmtAtualiza.setString(3, cliente.getSobrenome());
             stmtAtualiza.setString(4, cliente.getTelefone());
-            stmtAtualiza.setArray(5, cliente.getArray());
+//            stmtAtualiza.setArray(5, cliente.getArray());
 //            stmtAtualiza.setLong(5, cliente.getId());
             stmtAtualiza.executeUpdate();
         } finally {
@@ -95,7 +96,7 @@ public class ClienteDao {
 
     }
 
-    public void exluirLista(List<Cliente> clientes) throws SQLException {
+    public void excluirLista(List<Cliente> clientes) throws SQLException {
         for (Cliente cliente : clientes) {
             excluir(cliente);
         }

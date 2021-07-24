@@ -25,13 +25,12 @@ public class Cliente {
         this.pedidoCliente = pedidoCliente;
     }
 
-    public Cliente(String id, String nome, String sobrenome, String telefone, Array pedidoLista) {
+    public Cliente(String id, String nome, String sobrenome, String telefone) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.telefone = telefone;
         this.pedidoCliente = pedidoCliente;
-        this.pedidoLista = pedidoLista;
     }
 
     public Array getArray() {

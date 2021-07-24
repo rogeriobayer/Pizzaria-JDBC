@@ -1,6 +1,11 @@
 package pizzaria.view;
 
+import java.awt.event.MouseAdapter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.RowFilter;
 import javax.swing.SwingUtilities;
@@ -8,6 +13,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import pizzaria.controller.ClienteController;
 import pizzaria.model.Cliente;
 import pizzaria.model.Pedido;
 import pizzaria.model.SaborPizza;
@@ -263,6 +269,9 @@ public class TelaInicial extends javax.swing.JFrame {
         btn_pedidos_salvar = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         cbx_pedidos_estado = new javax.swing.JComboBox<>();
+        botoesControleCentral = new pizzaria.view.BotoesControleCentral();
+        tabelaClienteView = new pizzaria.view.TabelaClienteView();
+        formularioCliente = new pizzaria.view.FormularioClienteView();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -445,7 +454,7 @@ public class TelaInicial extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btn_cliente_excluir, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_cliente_pedido, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 55, Short.MAX_VALUE))
+                        .addGap(0, 27, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -558,7 +567,7 @@ public class TelaInicial extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(c_sabor_nome)
                             .addComponent(cbx_tipo_sabor, 0, 224, Short.MAX_VALUE))
-                        .addGap(0, 43, Short.MAX_VALUE))
+                        .addGap(0, 30, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btn_sabor_salvar)))
@@ -698,7 +707,7 @@ public class TelaInicial extends javax.swing.JFrame {
                                 .addComponent(jLabel9)
                                 .addGap(18, 18, 18)
                                 .addComponent(btn_preco_especial_salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -838,7 +847,7 @@ public class TelaInicial extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -861,14 +870,34 @@ public class TelaInicial extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tabs)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botoesControleCentral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(tabelaClienteView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(formularioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabs)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tabs)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(tabelaClienteView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(botoesControleCentral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(formularioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13))))
         );
 
         pack();
@@ -903,6 +932,80 @@ public class TelaInicial extends javax.swing.JFrame {
         manipulaInterface();
     }//GEN-LAST:event_btn_cliente_excluirActionPerformed
 
+    ///////// ONDA LARANJA
+    private ClienteTableModel clienteTableModel = new ClienteTableModel();
+
+    private int linhaClicadaParaAtualizacao = -1;
+
+    public void initView() {
+        /* Create and display the form */
+        tabelaClienteView.getTabelaCliente().setModel(clienteTableModel);
+        tabelaClienteView.getTabelaCliente().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                //Pega a linha clicada
+                linhaClicadaParaAtualizacao = tabelaClienteView.getTabelaCliente().rowAtPoint(evt.getPoint());
+                //Pega o contato da linha clicada
+                Cliente cliente = clienteTableModel.getCliente(linhaClicadaParaAtualizacao);
+                //Seta os dados nos componentes
+                formularioCliente.setCliente(cliente);
+            }
+        });
+
+        java.awt.EventQueue.invokeLater(() -> this.setVisible(true));
+    }
+
+    public Cliente getClienteFormulario() {
+        String nome = formularioCliente.getCampoNome().getText();
+        String sobrenome = formularioCliente.getCampoSobrenome().getText();
+        String telefone = formularioCliente.getCampoTelefone().getText();
+        return new Cliente(nome, sobrenome, telefone);
+    }
+
+    public void setController(ClienteController controller) {
+        botoesControleCentral.setController(controller);
+
+    }
+
+    public void inserirClienteView(Cliente cliente) {
+        clienteTableModel.adicionaCliente(cliente);
+    }
+
+    public void apresentaErro(String erro) {
+        JOptionPane.showMessageDialog(null, erro + "\n", "Erro", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void mostrarListaClientes(List<Cliente> lista) {
+        clienteTableModel.setListaClientes(lista);
+    }
+
+    public List<Cliente> getClientesParaExcluir() {
+        int[] linhasSelecionadas = this.tabelaClienteView.getTabelaCliente().getSelectedRows();
+        List<Cliente> listaExcluir = new ArrayList();
+        for (int i = 0; i < linhasSelecionadas.length; i++) {
+            Cliente cliente = clienteTableModel.getCliente(linhasSelecionadas[i]);
+            listaExcluir.add(cliente);
+        }
+        return listaExcluir;
+    }
+
+    public void excluirClientesView(List<Cliente> listaParaExcluir) {
+        clienteTableModel.removeClientes(listaParaExcluir);
+    }
+
+    public Cliente getClienteParaAtualizar() {
+        return formularioCliente.getClienteParaAtualizar();
+    }
+
+    public void atualizarCliente(Cliente cliente) {
+        clienteTableModel.fireTableRowsUpdated(linhaClicadaParaAtualizacao, linhaClicadaParaAtualizacao);
+
+    }
+
+    public void apresentaInfo(String info) {
+        JOptionPane.showMessageDialog(null, info + "\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+    }
+
     private void btn_cliente_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cliente_salvarActionPerformed
         String nome = c_cliente_nome.getText();
         String sobrenome = c_cliente_sobrenome.getText();
@@ -912,6 +1015,7 @@ public class TelaInicial extends javax.swing.JFrame {
             if (validaTelefone(telefone)) {
                 if (modo.equals("Novo")) {
                     Cliente novoCliente = new Cliente(nome, sobrenome, telefone);
+
                     listaClientes.add(novoCliente);
                 } else if (modo.equals("Editar")) {
                     int index = tb_clientes.getSelectedRow();
@@ -1183,6 +1287,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private pizzaria.view.BotoesControleCentral botoesControleCentral;
     private javax.swing.JButton btn_cliente_cancelar;
     private javax.swing.JButton btn_cliente_editar;
     private javax.swing.JButton btn_cliente_excluir;
@@ -1208,6 +1313,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JTextField c_sabor_nome;
     private javax.swing.JComboBox<String> cbx_pedidos_estado;
     private javax.swing.JComboBox<String> cbx_tipo_sabor;
+    private pizzaria.view.FormularioClienteView formularioCliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1235,6 +1341,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private pizzaria.view.TabelaClienteView tabelaClienteView;
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tb_clientes;
     private javax.swing.JTable tb_pedidos;
