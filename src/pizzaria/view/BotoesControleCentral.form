@@ -36,7 +36,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="btn_cliente_listar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Listar"/>
+        <Property name="text" type="java.lang.String" value="Listar Todos"/>
       </Properties>
     </Component>
   </SubComponents>

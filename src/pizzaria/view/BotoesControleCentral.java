@@ -31,7 +31,7 @@ public class BotoesControleCentral extends javax.swing.JPanel {
 
         btn_cliente_listar = new javax.swing.JButton();
 
-        btn_cliente_listar.setText("Listar");
+        btn_cliente_listar.setText("Listar Todos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
