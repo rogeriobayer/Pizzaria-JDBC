@@ -73,4 +73,19 @@ public class ClienteController {
         }
     }
 
+    public void filtrarClientes() {
+        try {
+
+            String query = view.getQueryParaFiltrar();
+            List<Cliente> lista = this.modelDao.getListaFiltrada(query);
+
+            view.mostrarListaClientes(lista);
+
+            view.cleanFilterQuery();
+        } catch (Exception ex) {
+//
+            view.apresentaErro("Erro ao filtrar clientes.");
+        }
+    }
+
 }

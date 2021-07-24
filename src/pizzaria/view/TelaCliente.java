@@ -37,6 +37,7 @@ public class TelaCliente extends javax.swing.JFrame {
         tabelaClienteView = new pizzaria.view.TabelaClienteView();
         formularioCliente = new pizzaria.view.FormularioClienteView();
         botoesControleCentral = new pizzaria.view.BotoesControleCentral();
+        clienteFormFilter = new pizzaria.view.ClienteFormFilter();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,10 +46,6 @@ public class TelaCliente extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(tabelaClienteView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(botoesControleCentral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -56,10 +53,21 @@ public class TelaCliente extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(formularioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(clienteFormFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(tabelaClienteView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(clienteFormFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(tabelaClienteView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -109,6 +117,7 @@ public class TelaCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private pizzaria.view.BotoesControleCentral botoesControleCentral;
+    private pizzaria.view.ClienteFormFilter clienteFormFilter;
     private pizzaria.view.FormularioClienteView formularioCliente;
     private pizzaria.view.TabelaClienteView tabelaClienteView;
     // End of variables declaration//GEN-END:variables
@@ -145,6 +154,7 @@ public class TelaCliente extends javax.swing.JFrame {
     public void setController(ClienteController controller) {
         botoesControleCentral.setController(controller);
         formularioCliente.setController(controller);
+        clienteFormFilter.setController(controller);
 
     }
 
@@ -181,6 +191,15 @@ public class TelaCliente extends javax.swing.JFrame {
     public void atualizarCliente(Cliente cliente) {
         clienteTableModel.fireTableRowsUpdated(linhaClicadaParaAtualizacao, linhaClicadaParaAtualizacao);
 
+    }
+
+    //FILTRO
+    public String getQueryParaFiltrar() {
+        return clienteFormFilter.getQueryParaFiltrar();
+    }
+
+    public void cleanFilterQuery() {
+        clienteFormFilter.cleanQuery();
     }
 
     public void apresentaInfo(String info) {

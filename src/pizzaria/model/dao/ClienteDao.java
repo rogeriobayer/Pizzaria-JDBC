@@ -18,6 +18,7 @@ public class ClienteDao {
     private final String select = "select * from clientes";
     private final String update = "update clientes set nome=?, telefone=?, sobrenome=?WHERE id=?";
     private final String delete = "delete from clientes WHERE id=?";
+    private final String search = "SELECT * FROM clientes WHERE nome LIKE ? OR sobrenome LIKE ? OR telefone LIKE ?";
 
     public ClienteDao(ConnectionFactory conFactory) {
         this.connectionFactory = conFactory;
@@ -74,6 +75,39 @@ public class ClienteDao {
         } finally {
             rs.close();
             stmtLista.close();
+        }
+    }
+
+    public List<Cliente> getListaFiltrada(String query) throws Exception {
+        Connection connection = connectionFactory.getConnection();
+        ResultSet rs = null;
+        PreparedStatement stmtFilter = connection.prepareStatement(search);
+        try {
+            stmtFilter.setString(1, "%" + query + "%");
+            stmtFilter.setString(2, "%" + query + "%");
+            stmtFilter.setString(3, "%" + query + "%");
+            rs = stmtFilter.executeQuery();
+            List<Cliente> clientes = new ArrayList();
+            while (rs.next()) {
+                // criando o objeto Cliente
+                //Cliente cliente = new Cliente();
+                String id = rs.getString("id");
+                String nome = rs.getString("nome");
+                String sobrenome = rs.getString("sobrenome");
+                String telefone = rs.getString("telefone");
+//                LocalDate dataNascimento = rs.getDate("dataNascimento").toLocalDate();
+//                Array pedidosArray = rs.getArray("pedidosArray");
+
+                // adicionando o objeto à lista
+                clientes.add(new Cliente(id, nome, sobrenome, telefone));
+            }
+
+            return clientes;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            rs.close();
+            stmtFilter.close();
         }
 
     }
