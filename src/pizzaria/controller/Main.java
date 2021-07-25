@@ -8,6 +8,7 @@ package pizzaria.controller;
 import pizzaria.model.dao.ConnectionFactory;
 import pizzaria.model.dao.ClienteDao;
 import pizzaria.model.dao.SaborDao;
+import pizzaria.model.dao.TipoDao;
 import pizzaria.view.TelaCliente;
 
 /**
@@ -22,6 +23,8 @@ public class Main {
         ClienteController controller = new ClienteController(view, modelDao);
         SaborDao saborDao = new SaborDao(new ConnectionFactory());
         SaborController saborController = new SaborController(view, saborDao);
+        TipoDao tipoDao = new TipoDao(new ConnectionFactory());
+        TipoController tipoController = new TipoController(view, tipoDao);
     }
 
 }

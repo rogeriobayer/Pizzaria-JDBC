@@ -20,6 +20,8 @@ public class SaborDao {
     private final String delete = "delete from sabores WHERE id=?";
     private final String search = "SELECT * FROM sabores WHERE nome LIKE ? OR tipo LIKE ?";
 
+    private final String preco = "select * from tipo_pizza WHERE id=?";
+
     public SaborDao(ConnectionFactory conFactory) {
         this.connectionFactory = conFactory;
     }

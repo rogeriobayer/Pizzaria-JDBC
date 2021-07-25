@@ -45,9 +45,9 @@ public class SaborController {
             view.atualizarSabor(sabor);
 
         } catch (Exception ex) {
-            view.apresentaErro(ex.getMessage());
+//            view.apresentaErro(ex.getMessage());
 
-//            view.apresentaErro("Erro ao atualizar sabor.");
+            view.apresentaErro("Erro ao atualizar sabor.");
         }
     }
 

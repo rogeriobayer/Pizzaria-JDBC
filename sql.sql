@@ -1,9 +1,25 @@
-CREATE TABLE cliente(
+CREATE TABLE clientes(
 id varchar(100) NOT NULL,
 nome varchar(100) NOT NULL,
 sobrenome varchar(100) NOT NULL,
 telefone varchar(100) NOT NULL,
-constraint pk_Autor PRIMARY KEY (id)
+constraint pk_cliente PRIMARY KEY (id)
+);
+
+
+CREATE TABLE sabores(
+id varchar(100) NOT NULL,
+nome varchar(100) NOT NULL,
+tipo int NOT NULL,
+ constraint fk_sabores PRIMARY KEY (id)
+ constraint fk_tipo foreign key(tipo) references tipo_pizza(id)
+);
+
+CREATE TABLE tipo_pizza(
+id integer NOT NULL,
+nome varchar(100) NOT NULL,
+preco double NOT NULL,
+constraint pk_tipoPizza PRIMARY KEY (id)
 );
 
 

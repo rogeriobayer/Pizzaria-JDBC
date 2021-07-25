@@ -11,8 +11,10 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import pizzaria.controller.ClienteController;
 import pizzaria.controller.SaborController;
+import pizzaria.controller.TipoController;
 import pizzaria.model.Cliente;
 import pizzaria.model.Sabor;
+import pizzaria.model.Tipo;
 
 /**
  *
@@ -44,6 +46,8 @@ public class TelaCliente extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         saborFormularioView = new pizzaria.view.SaborFormularioView();
         saborTabelaView = new pizzaria.view.SaborTabelaView();
+        jPanel3 = new javax.swing.JPanel();
+        tipoFormularioView = new pizzaria.view.TipoFormularioView();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,6 +101,25 @@ public class TelaCliente extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Sabores", jPanel2);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(8, Short.MAX_VALUE)
+                .addComponent(tipoFormularioView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(109, 109, 109)
+                .addComponent(tipoFormularioView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(194, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Preços", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -157,10 +180,12 @@ public class TelaCliente extends javax.swing.JFrame {
     private pizzaria.view.ClienteFormularioView formularioCliente;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private pizzaria.view.SaborFormularioView saborFormularioView;
     private pizzaria.view.SaborTabelaView saborTabelaView;
     private pizzaria.view.ClienteTabelaView tabelaClienteView;
+    private pizzaria.view.TipoFormularioView tipoFormularioView;
     // End of variables declaration//GEN-END:variables
 
     private ClienteTableModel clienteTableModel = new ClienteTableModel();
@@ -303,6 +328,33 @@ public class TelaCliente extends javax.swing.JFrame {
 
     public void atualizarSabor(Sabor sabor) {
         saborTableModel.fireTableRowsUpdated(saborClicadoParaAtualizacao, saborClicadoParaAtualizacao);
+    }
+
+    //PREÇOS / TIPO
+//    public void initTiposView() {
+//        /* Create and display the form */
+//        tipoTabelaView.getTabelaTipo().setModel(tipoTableModel);
+//        tipoTabelaView.getTabelaTipo().addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(java.awt.event.MouseEvent evt) {
+//                tipoClicadoParaAtualizacao = tipoTabelaView.getTabelaTipo().rowAtPoint(evt.getPoint());
+//                Tipo tipo = tipoTableModel.getTipo(tipoClicadoParaAtualizacao);
+//                tipoFormularioView.setTipo(tipo);
+//            }
+//        });
+//
+//        java.awt.EventQueue.invokeLater(() -> this.setVisible(true));
+//    }
+    public void setTipoController(TipoController controller) {
+        tipoFormularioView.setController(controller);
+    }
+
+    public void mostrarListaTipo(List<Tipo> lista) {
+        tipoFormularioView.setListaTipo(lista);
+    }
+
+    public Double getTipoParaAtualizar(Integer type) {
+        return tipoFormularioView.getTipoParaAtualizar(type);
     }
 
 }
