@@ -10,14 +10,14 @@ import pizzaria.model.Cliente;
  *
  * @author tomat
  */
-public class FormularioClienteView extends javax.swing.JPanel {
+public class ClienteFormularioView extends javax.swing.JPanel {
 
     private Cliente clienteSelecionadoParaAtualizacao;
 
     /**
      * Creates new form FormularioClienteView
      */
-    public FormularioClienteView() {
+    public ClienteFormularioView() {
         initComponents();
     }
 

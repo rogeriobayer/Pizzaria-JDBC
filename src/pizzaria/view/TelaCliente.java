@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import pizzaria.controller.ClienteController;
+import pizzaria.controller.SaborController;
 import pizzaria.model.Cliente;
+import pizzaria.model.Sabor;
 
 /**
  *
@@ -37,10 +39,11 @@ public class TelaCliente extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         clienteFormFilter = new pizzaria.view.ClienteFormFilter();
-        botoesControleCentral = new pizzaria.view.BotoesControleCentral();
-        tabelaClienteView = new pizzaria.view.TabelaClienteView();
-        formularioCliente = new pizzaria.view.FormularioClienteView();
+        tabelaClienteView = new pizzaria.view.ClienteTabelaView();
+        formularioCliente = new pizzaria.view.ClienteFormularioView();
         jPanel2 = new javax.swing.JPanel();
+        saborFormularioView = new pizzaria.view.SaborFormularioView();
+        saborTabelaView = new pizzaria.view.SaborTabelaView();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,7 +55,6 @@ public class TelaCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(clienteFormFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botoesControleCentral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(tabelaClienteView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -67,8 +69,6 @@ public class TelaCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tabelaClienteView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botoesControleCentral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(formularioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -79,14 +79,24 @@ public class TelaCliente extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 412, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(saborTabelaView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(saborFormularioView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 535, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(saborTabelaView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(saborFormularioView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("tab2", jPanel2);
+        jTabbedPane1.addTab("Sabores", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,13 +153,14 @@ public class TelaCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private pizzaria.view.BotoesControleCentral botoesControleCentral;
     private pizzaria.view.ClienteFormFilter clienteFormFilter;
-    private pizzaria.view.FormularioClienteView formularioCliente;
+    private pizzaria.view.ClienteFormularioView formularioCliente;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private pizzaria.view.TabelaClienteView tabelaClienteView;
+    private pizzaria.view.SaborFormularioView saborFormularioView;
+    private pizzaria.view.SaborTabelaView saborTabelaView;
+    private pizzaria.view.ClienteTabelaView tabelaClienteView;
     // End of variables declaration//GEN-END:variables
 
     private ClienteTableModel clienteTableModel = new ClienteTableModel();
@@ -182,10 +193,9 @@ public class TelaCliente extends javax.swing.JFrame {
     }
 
     public void setController(ClienteController controller) {
-        botoesControleCentral.setController(controller);
+        tabelaClienteView.setController(controller);
         formularioCliente.setController(controller);
         clienteFormFilter.setController(controller);
-
     }
 
     public void inserirClienteView(Cliente cliente) {
@@ -220,7 +230,6 @@ public class TelaCliente extends javax.swing.JFrame {
 
     public void atualizarCliente(Cliente cliente) {
         clienteTableModel.fireTableRowsUpdated(linhaClicadaParaAtualizacao, linhaClicadaParaAtualizacao);
-
     }
 
     //FILTRO
@@ -234,6 +243,66 @@ public class TelaCliente extends javax.swing.JFrame {
 
     public void apresentaInfo(String info) {
         JOptionPane.showMessageDialog(null, info + "\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    //SABORES
+    private int saborClicadoParaAtualizacao = -1;
+    private SaborTableModel saborTableModel = new SaborTableModel();
+
+    public void initSaboresView() {
+        /* Create and display the form */
+        saborTabelaView.getTabelaSabor().setModel(saborTableModel);
+        saborTabelaView.getTabelaSabor().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                saborClicadoParaAtualizacao = saborTabelaView.getTabelaSabor().rowAtPoint(evt.getPoint());
+                Sabor sabor = saborTableModel.getSabor(saborClicadoParaAtualizacao);
+                saborFormularioView.setSabor(sabor);
+            }
+        });
+
+        java.awt.EventQueue.invokeLater(() -> this.setVisible(true));
+    }
+
+    public void setSaborController(SaborController controller) {
+        saborTabelaView.setController(controller);
+        saborFormularioView.setController(controller);
+    }
+
+    public Sabor getSaborFormulario() {
+        String nome = saborFormularioView.getCampoNome().getText();
+        Integer tipo = saborFormularioView.getCampoTipo().getSelectedIndex();
+        return new Sabor(nome, tipo);
+    }
+
+    public void inserirSaborView(Sabor sabor) {
+        saborTableModel.adicionaSabor(sabor);
+    }
+
+    public void mostrarListaSabores(List<Sabor> lista) {
+        saborTableModel.setListaSabores(lista);
+    }
+
+    public List<Sabor> getSaboresParaExcluir() {
+        int[] linhasSelecionadas = this.saborTabelaView.getTabelaSabor().getSelectedRows();
+        List<Sabor> listaExcluir = new ArrayList();
+        for (int i = 0; i < linhasSelecionadas.length; i++) {
+            Sabor sabor = saborTableModel.getSabor(linhasSelecionadas[i]);
+            listaExcluir.add(sabor);
+        }
+        return listaExcluir;
+    }
+
+    public void excluirSaboresView(List<Sabor> listaParaExcluir) {
+        saborTableModel.removeSabores(listaParaExcluir);
+    }
+
+    public Sabor getSaborParaAtualizar() {
+        return saborFormularioView.getSaborParaAtualizar();
+    }
+
+    public void atualizarSabor(Sabor sabor) {
+        saborTableModel.fireTableRowsUpdated(saborClicadoParaAtualizacao, saborClicadoParaAtualizacao);
     }
 
 }

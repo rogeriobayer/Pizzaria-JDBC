@@ -269,9 +269,8 @@ public class TelaInicial extends javax.swing.JFrame {
         btn_pedidos_salvar = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         cbx_pedidos_estado = new javax.swing.JComboBox<>();
-        botoesControleCentral = new pizzaria.view.BotoesControleCentral();
-        tabelaClienteView = new pizzaria.view.TabelaClienteView();
-        formularioCliente = new pizzaria.view.FormularioClienteView();
+        tabelaClienteView = new pizzaria.view.ClienteTabelaView();
+        formularioCliente = new pizzaria.view.ClienteFormularioView();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -872,9 +871,6 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addComponent(tabs)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botoesControleCentral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addComponent(tabelaClienteView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -893,9 +889,7 @@ public class TelaInicial extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(tabelaClienteView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(botoesControleCentral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(42, 42, 42)
                         .addComponent(formularioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(13, 13, 13))))
         );
@@ -960,11 +954,6 @@ public class TelaInicial extends javax.swing.JFrame {
         String sobrenome = formularioCliente.getCampoSobrenome().getText();
         String telefone = formularioCliente.getCampoTelefone().getText();
         return new Cliente(nome, sobrenome, telefone);
-    }
-
-    public void setController(ClienteController controller) {
-        botoesControleCentral.setController(controller);
-
     }
 
     public void inserirClienteView(Cliente cliente) {
@@ -1287,7 +1276,6 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private pizzaria.view.BotoesControleCentral botoesControleCentral;
     private javax.swing.JButton btn_cliente_cancelar;
     private javax.swing.JButton btn_cliente_editar;
     private javax.swing.JButton btn_cliente_excluir;
@@ -1313,7 +1301,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JTextField c_sabor_nome;
     private javax.swing.JComboBox<String> cbx_pedidos_estado;
     private javax.swing.JComboBox<String> cbx_tipo_sabor;
-    private pizzaria.view.FormularioClienteView formularioCliente;
+    private pizzaria.view.ClienteFormularioView formularioCliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1341,7 +1329,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private pizzaria.view.TabelaClienteView tabelaClienteView;
+    private pizzaria.view.ClienteTabelaView tabelaClienteView;
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tb_clientes;
     private javax.swing.JTable tb_pedidos;

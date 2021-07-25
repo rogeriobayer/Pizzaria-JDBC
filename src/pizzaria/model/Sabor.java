@@ -27,6 +27,10 @@ public class Sabor {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -41,5 +45,19 @@ public class Sabor {
 
     public void setTipo(Integer tipo) {
         this.tipo = tipo;
+    }
+
+    public String getTipoString() {
+        switch (tipo) {
+            case 0:
+                return "Simples";
+            case 1:
+                return "Especial";
+
+            case 2:
+                return "Premium";
+
+        }
+        return null;
     }
 }

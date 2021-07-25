@@ -14,7 +14,7 @@ public class SaborDao {
 // a conexão com o banco de dados
 
     private ConnectionFactory connectionFactory;
-    private final String insert = "insert into sabores (id, nome,tipo) values (?,?,?,?)";
+    private final String insert = "insert into sabores (id, nome,tipo) values (?,?,?)";
     private final String select = "select * from sabores";
     private final String update = "update sabores set nome=?, tipo=?WHERE id=?";
     private final String delete = "delete from sabores WHERE id=?";
