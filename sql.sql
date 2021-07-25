@@ -22,6 +22,13 @@ preco double NOT NULL,
 constraint pk_tipoPizza PRIMARY KEY (id)
 );
 
+INSERT INTO tipo_pizza 
+VALUES (0, "Simples", 0);
+INSERT INTO tipo_pizza 
+VALUES (1, "Especial", 1);
+INSERT INTO tipo_pizza 
+VALUES (2, "Premium", 2);
+
 
 CREATE TABLE livro
 (id int(4) AUTO_INCREMENT,
