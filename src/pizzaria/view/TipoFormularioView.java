@@ -7,8 +7,6 @@ import pizzaria.model.Tipo;
 
 public class TipoFormularioView extends javax.swing.JPanel {
 
-    private Tipo clienteSelecionadoParaAtualizacao;
-
     public TipoFormularioView() {
         initComponents();
     }
@@ -154,13 +152,6 @@ public class TipoFormularioView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 
-    public void setTipo(Tipo tipo) {
-        this.clienteSelecionadoParaAtualizacao = tipo;
-
-        c_simples.setText(tipo.getNome());
-
-    }
-
     public Double getTipoParaAtualizar(Integer type) {
         switch (type) {
             case 0:
@@ -190,7 +181,6 @@ public class TipoFormularioView extends javax.swing.JPanel {
     }
 
     public void setController(TipoController controller) {
-
         this.btn_simples.addActionListener(e -> controller.atualizarTipo(0));
         this.btn_especial.addActionListener(e -> controller.atualizarTipo(1));
         this.btn_premium.addActionListener(e -> controller.atualizarTipo(2));

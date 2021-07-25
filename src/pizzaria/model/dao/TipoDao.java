@@ -31,7 +31,6 @@ public class TipoDao {
                 Double preco = rs.getDouble("preco");
                 tipo.add(new Tipo(id, nome, preco));
             }
-
             return tipo;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -39,7 +38,6 @@ public class TipoDao {
             rs.close();
             stmtLista.close();
         }
-
     }
 
     public void atualizar(Integer type, Double value) throws SQLException {
@@ -52,7 +50,5 @@ public class TipoDao {
         } finally {
             stmtAtualiza.close();
         }
-
     }
-
 }

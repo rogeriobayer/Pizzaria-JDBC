@@ -23,16 +23,11 @@ public class TipoController {
 
     public void atualizarTipo(Integer type) {
         try {
-
             Double preco = view.getTipoParaAtualizar(type);
-
             modelDao.atualizar(type, preco);
-//            view.atualizarTipo(tipo);
             this.listarTipo();
         } catch (Exception ex) {
             view.apresentaErro(ex.getMessage());
-
-//            view.apresentaErro("Erro ao atualizar tipo.");
         }
     }
 
