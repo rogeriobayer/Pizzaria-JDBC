@@ -19,6 +19,7 @@ public class ClienteDao {
     private final String update = "update clientes set nome=?, telefone=?, sobrenome=?WHERE id=?";
     private final String delete = "delete from clientes WHERE id=?";
     private final String search = "SELECT * FROM clientes WHERE nome LIKE ? OR sobrenome LIKE ? OR telefone LIKE ?";
+    private final String phone = "SELECT telefone FROM clientes WHERE id = ?";
 
     public ClienteDao(ConnectionFactory conFactory) {
         this.connectionFactory = conFactory;
@@ -52,7 +53,9 @@ public class ClienteDao {
         Connection connection = connectionFactory.getConnection();
         ResultSet rs = null;
         PreparedStatement stmtLista = connection.prepareStatement(select);
+
         try {
+
             rs = stmtLista.executeQuery();
             List<Cliente> clientes = new ArrayList();
             while (rs.next()) {
@@ -147,5 +150,30 @@ public class ClienteDao {
             stmtExcluir.close();
         }
 
+    }
+
+    public String getTelefone(String query) throws SQLException {
+        Connection connection = connectionFactory.getConnection();
+        ResultSet rs = null;
+        PreparedStatement stmtLista = connection.prepareStatement(phone);
+        String phone = null;
+
+        try {
+            stmtLista.setString(1, query);
+
+            rs = stmtLista.executeQuery();
+            while (rs.next()) {
+                phone = rs.getString("telefone");
+                System.out.print("asjiijasd" + phone);
+
+            }
+
+            return phone;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            rs.close();
+            stmtLista.close();
+        }
     }
 }

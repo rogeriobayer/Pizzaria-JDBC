@@ -1,6 +1,5 @@
 package pizzaria.model.dao;
 
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,9 +14,9 @@ public class PedidoDao {
 // a conexão com o banco de dados
 
     private ConnectionFactory connectionFactory;
-    private final String insert = "insert into pedidos (id,preco,idcliente,estado) values (?,?,?,?)";
+    private final String insert = "insert into pedidos (id,preco,id_cliente,estado) values (?,?,?,?)";
     private final String select = "select * from pedidos";
-    private final String update = "update pedidos set id=?, preco=?, idcliente=?, estado=? WHERE id=?";
+    private final String update = "update pedidos set  preco=?, id_cliente=?, estado=? WHERE id=?";
     private final String delete = "delete from pedidos WHERE id=?";
 
     public PedidoDao(ConnectionFactory conFactory) {
@@ -36,12 +35,6 @@ public class PedidoDao {
             stmtAdiciona.setInt(4, pedido.getEstado());
             // executa
             stmtAdiciona.execute();
-            //Seta o id do pedido
-//            ResultSet rs = stmtAdiciona.getGeneratedKeys();
-//            rs.next();
-//            long i = rs.getLong(1);
-//            pedido.setId(i);
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -55,19 +48,12 @@ public class PedidoDao {
             rs = stmtLista.executeQuery();
             List<Pedido> pedidos = new ArrayList();
             while (rs.next()) {
-                // criando o objeto Pedido
-                //Pedido pedido = new Pedido();
                 String id = rs.getString("id");
                 Double preco = rs.getDouble("preco");
-                String idCliente = rs.getString("idCliente");
+                String idCliente = rs.getString("id_cliente");
                 Integer estado = rs.getInt("estado");
-//                LocalDate dataNascimento = rs.getDate("dataNascimento").toLocalDate();
-//                Array pedidosArray = rs.getArray("pedidosArray");
-
-                // adicionando o objeto à lista
-                pedidos.add(new Pedido(id, preco, idCliente, estado));
+                pedidos.add(new Pedido(id, idCliente, preco, estado));
             }
-
             return pedidos;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -82,13 +68,10 @@ public class PedidoDao {
         Connection connection = connectionFactory.getConnection();
         PreparedStatement stmtAtualiza = connection.prepareStatement(update);
         try {
-            stmtAtualiza.setString(1, pedido.getId());
-
-            stmtAtualiza.setDouble(2, pedido.getPreco());
-            stmtAtualiza.setString(3, pedido.getIdCliente());
-            stmtAtualiza.setInt(4, pedido.getEstado());
-//            stmtAtualiza.setArray(5, pedido.getArray());
-//            stmtAtualiza.setLong(5, pedido.getId());;
+            stmtAtualiza.setDouble(1, pedido.getPreco());
+            stmtAtualiza.setString(2, pedido.getIdCliente());
+            stmtAtualiza.setInt(3, pedido.getEstado());
+            stmtAtualiza.setString(4, pedido.getId());
             stmtAtualiza.executeUpdate();
         } finally {
             stmtAtualiza.close();

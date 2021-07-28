@@ -30,6 +30,40 @@ INSERT INTO tipo_pizza
 VALUES (2, "Premium", 2);
 
 
+CREATE TABLE pedidos(
+id varchar(100) NOT NULL,
+id_cliente varchar(100) NOT NULL,
+preço  double NOT NULL,
+estado varchar(100), -- ABERTO = 0; A_CAMINHO = 1; ENTREGUE = 2;
+-- forma integer not null,
+-- preco double NOT NULL,
+constraint pk_tipoPizza PRIMARY KEY (id),
+ constraint pk_cliente foreign key(id_cliente) references clientes(id)
+
+)
+
+CREATE TABLE pizzas(
+id varchar(100) NOT NULL,
+id_pedido varchar(100) NOT NULL,
+nome varchar(100) NOT NULL,
+id_sabor1 varchar(100) NOT NULL,
+id_sabor2 varchar(100),
+forma integer not null, 
+area double,
+raio double,
+centimetro_quadrado integer, 
+preco double NOT NULL,
+constraint pk_pizza PRIMARY KEY (id),
+ constraint pk_pedido foreign key(id_pedido) references pedidos(id),
+ constraint pk_sabor1 foreign key(id_sabor1) references sabores(id),
+ constraint pk_sabor2 foreign key(id_sabor2) references sabores(id)
+
+);
+  
+
+
+
+
 CREATE TABLE livro
 (id int(4) AUTO_INCREMENT,
 titulo varchar(45),

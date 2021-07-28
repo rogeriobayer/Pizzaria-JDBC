@@ -10,9 +10,6 @@ public class Cliente {
     private String nome;
     private String sobrenome;
     private String telefone;
-    private Array pedidoLista;
-
-    private Pedido pedidoCliente;
 
     public Cliente() {
     }
@@ -22,7 +19,6 @@ public class Cliente {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.telefone = telefone;
-        this.pedidoCliente = pedidoCliente;
     }
 
     public Cliente(String id, String nome, String sobrenome, String telefone) {
@@ -30,15 +26,6 @@ public class Cliente {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.telefone = telefone;
-        this.pedidoCliente = pedidoCliente;
-    }
-
-    public Array getArray() {
-        return pedidoLista;
-    }
-
-    public void setArray(Array pedidoLista) {
-        this.pedidoLista = pedidoLista;
     }
 
     public String getId() {
@@ -73,12 +60,4 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public Pedido getPedido() {
-        return pedidoCliente;
-    }
-
-    public void setPedido(Pedido pedido) {
-        pedido.setCliente(this);
-        this.pedidoCliente = pedido;
-    }
 }

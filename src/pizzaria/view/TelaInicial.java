@@ -1222,11 +1222,11 @@ public class TelaInicial extends javax.swing.JFrame {
             }
 
             for (int i = 0; i < listaClientes.size(); i++) {
-                Pedido pedido = listaClientes.get(i).getPedido();
-                if (pedido.getId() == idPedido) {
-                    pedido.setEstado(estadoNum);
-                    loadTablePedidos();
-                }
+//                Pedido pedido = listaClientes.get(i).getPedido();
+//                if (pedido.getId() == idPedido) {;
+//                    pedido.setEstado(estadoNum);
+//                    loadTablePedidos();
+//                }
             }
         }
     }//GEN-LAST:event_btn_pedidos_salvarActionPerformed

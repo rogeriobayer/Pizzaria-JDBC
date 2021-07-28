@@ -6,13 +6,18 @@
 package pizzaria.view;
 
 import java.awt.event.MouseAdapter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import pizzaria.controller.ClienteController;
+import pizzaria.controller.PedidoController;
 import pizzaria.controller.SaborController;
 import pizzaria.controller.TipoController;
 import pizzaria.model.Cliente;
+import pizzaria.model.Pedido;
 import pizzaria.model.Sabor;
 import pizzaria.model.Tipo;
 
@@ -48,6 +53,9 @@ public class TelaCliente extends javax.swing.JFrame {
         saborTabelaView = new pizzaria.view.SaborTabelaView();
         jPanel3 = new javax.swing.JPanel();
         tipoFormularioView = new pizzaria.view.TipoFormularioView();
+        jPanel4 = new javax.swing.JPanel();
+        pedidoTabelaView = new pizzaria.view.PedidoTabelaView();
+        pedidoFormularioView = new pizzaria.view.PedidoFormularioView();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,6 +129,29 @@ public class TelaCliente extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Preços", jPanel3);
 
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pedidoFormularioView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pedidoTabelaView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(11, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(pedidoTabelaView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(pedidoFormularioView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Pedidos", jPanel4);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -181,7 +212,10 @@ public class TelaCliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private pizzaria.view.PedidoFormularioView pedidoFormularioView;
+    private pizzaria.view.PedidoTabelaView pedidoTabelaView;
     private pizzaria.view.SaborFormularioView saborFormularioView;
     private pizzaria.view.SaborTabelaView saborTabelaView;
     private pizzaria.view.ClienteTabelaView tabelaClienteView;
@@ -331,20 +365,6 @@ public class TelaCliente extends javax.swing.JFrame {
     }
 
     //PREÇOS / TIPO
-//    public void initTiposView() {
-//        /* Create and display the form */
-//        tipoTabelaView.getTabelaTipo().setModel(tipoTableModel);
-//        tipoTabelaView.getTabelaTipo().addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(java.awt.event.MouseEvent evt) {
-//                tipoClicadoParaAtualizacao = tipoTabelaView.getTabelaTipo().rowAtPoint(evt.getPoint());
-//                Tipo tipo = tipoTableModel.getTipo(tipoClicadoParaAtualizacao);
-//                tipoFormularioView.setTipo(tipo);
-//            }
-//        });
-//
-//        java.awt.EventQueue.invokeLater(() -> this.setVisible(true));
-//    }
     public void setTipoController(TipoController controller) {
         tipoFormularioView.setController(controller);
     }
@@ -355,6 +375,60 @@ public class TelaCliente extends javax.swing.JFrame {
 
     public Double getTipoParaAtualizar(Integer type) {
         return tipoFormularioView.getTipoParaAtualizar(type);
+    }
+
+    //SABORES
+    private int pedidoClicadoParaAtualizacao = -1;
+    private PedidoTableModel pedidoTableModel = new PedidoTableModel();
+
+    public void initPedidosView() {
+        /* Create and display the form */
+        pedidoTabelaView.getTabelaPedido().setModel(pedidoTableModel);
+        pedidoTabelaView.getTabelaPedido().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pedidoClicadoParaAtualizacao = pedidoTabelaView.getTabelaPedido().rowAtPoint(evt.getPoint());
+                Pedido pedido = pedidoTableModel.getPedido(pedidoClicadoParaAtualizacao);
+                try {
+                    pedidoFormularioView.setPedido(pedido);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+
+        java.awt.EventQueue.invokeLater(() -> this.setVisible(true));
+    }
+
+    public void setPedidoController(PedidoController controller) {
+        pedidoTabelaView.setController(controller);
+        pedidoFormularioView.setController(controller);
+    }
+
+    public void inserirPedidoView(Pedido pedido) {
+        pedidoTableModel.adicionaPedido(pedido);
+    }
+
+    public void mostrarListaPedidos(List<Pedido> lista) {
+        pedidoTableModel.setListaPedidos(lista);
+    }
+
+    public List<Pedido> getPedidoesParaExcluir() {
+        int[] linhasSelecionadas = this.pedidoTabelaView.getTabelaPedido().getSelectedRows();
+        List<Pedido> listaExcluir = new ArrayList();
+        for (int i = 0; i < linhasSelecionadas.length; i++) {
+            Pedido pedido = pedidoTableModel.getPedido(linhasSelecionadas[i]);
+            listaExcluir.add(pedido);
+        }
+        return listaExcluir;
+    }
+
+    public Pedido getPedidoParaAtualizar() {
+        return pedidoFormularioView.getPedidoParaAtualizar();
+    }
+
+    public void atualizarPedido(Pedido pedido) {
+        pedidoTableModel.fireTableRowsUpdated(pedidoClicadoParaAtualizacao, pedidoClicadoParaAtualizacao);
     }
 
 }

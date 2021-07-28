@@ -1,41 +1,43 @@
 package pizzaria.model;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.UUID;
 import pizzaria.utils.EstadosEnum;
+import pizzaria.model.dao.ClienteDao;
+import pizzaria.model.dao.ConnectionFactory;
 
 public class Pedido {
 
     private String id;
-    private double preco;
-    private Cliente cliente; //FUTURE REMOVAL
     private String idCliente;
+    private double preco;
+    private Integer estado;
 
-    private int estado;
-    ArrayList<Pizza> listaPizzas; //FUTURE REMOVAL
+    ClienteDao modelDao = new ClienteDao(new ConnectionFactory());
 
-    public Pedido(Cliente cliente) {
+    public Pedido(String idCliente,
+            double preco,
+            int estado) {
         this.id = UUID.randomUUID().toString();
-        listaPizzas = new ArrayList();
-        this.estado = EstadosEnum.ABERTO;
-        this.cliente = cliente;
-        this.preco = 0;
-    }
-
-    public Pedido(String idCliente) { //NEW1
-        this.id = UUID.randomUUID().toString();
-//        listaPizzas = new ArrayList();
-        this.estado = EstadosEnum.ABERTO;
         this.idCliente = idCliente;
-        this.preco = 0;
-    }
-
-    public Pedido(String id, Double preco, String idCliente, Integer estado) { //NEW2
-        this.id = id;
-//        listaPizzas = new ArrayList();
         this.estado = estado;
-        this.idCliente = idCliente;
         this.preco = preco;
+    }
+
+    public Pedido(String id, String idCliente,
+            double preco,
+            Integer estado) {
+        this.id = id;
+        this.idCliente = idCliente;
+        this.estado = estado;
+        this.preco = preco;
+    }
+
+    public Pedido(String idCliente) {
+        this.id = UUID.randomUUID().toString();
+        this.estado = EstadosEnum.ABERTO;
+        this.idCliente = idCliente;
+        this.preco = 0;
     }
 
     public String getIdCliente() {
@@ -62,14 +64,6 @@ public class Pedido {
         this.preco = preco;
     }
 
-    public Cliente getCliente() { ////FUTURE REMOVAL
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) { ////FUTURE REMOVAL
-        this.cliente = cliente;
-    }
-
     public int getEstado() {
         return estado;
     }
@@ -78,20 +72,27 @@ public class Pedido {
         this.estado = estado;
     }
 
-    public ArrayList<Pizza> getListaPizzas() {
-        return listaPizzas;
+    public String getEstadoString() {
+        switch (estado) {
+            case 0:
+                return "Aberto";
+            case 1:
+                return "A caminho";
+
+            case 2:
+                return "Entregue";
+
+        }
+        return null;
     }
 
-    public void setListaPizzas(ArrayList<Pizza> listaPizzas) {
-        this.listaPizzas = listaPizzas;
+    public String getTelefone() throws SQLException {
+        System.out.print(this.idCliente);
+
+        return this.modelDao.getTelefone(this.idCliente);
     }
 
-    public void addPizza(Pizza pizza) {
-        pizza.setPedido(this);
-        listaPizzas.add(pizza);
-    }
-
-    public void removePizza(int index) {
-        listaPizzas.remove(index);
+    public void setTelefone(int estado) {
+        this.estado = estado;
     }
 }
