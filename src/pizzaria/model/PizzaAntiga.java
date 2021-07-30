@@ -1,6 +1,6 @@
 package pizzaria.model;
 
-public class NovaPizza {
+public class PizzaAntiga {
     
     private Pedido pedido;
     private Forma forma;
@@ -11,7 +11,7 @@ public class NovaPizza {
     private SaborPizza sabor2;
     private double precoTotal;
 
-    public NovaPizza(Pedido pedido, Forma forma, boolean isMetricaCmQuadrado, double area, double ladoOuRaio, SaborPizza sabor1, SaborPizza sabor2, double precoTotal) {
+    public PizzaAntiga(Pedido pedido, Forma forma, boolean isMetricaCmQuadrado, double area, double ladoOuRaio, SaborPizza sabor1, SaborPizza sabor2, double precoTotal) {
         this.pedido = pedido;
         this.forma = forma;
         this.isMetricaCmQuadrado = isMetricaCmQuadrado;
@@ -22,7 +22,7 @@ public class NovaPizza {
         this.precoTotal = precoTotal;
     }
 
-    public NovaPizza() {
+    public PizzaAntiga() {
     }
     
     public Forma getForma() {

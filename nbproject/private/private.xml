@@ -13,13 +13,20 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/model/Pedido.java</file>
+            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/view/NovoPedidoTabelaView.java</file>
+            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/model/Triangulo.java</file>
+            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/model/PizzaAntiga.java</file>
+            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/model/Forma.java</file>
+            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/utils/FormaPizzaEnum.java</file>
+            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/view/TelaCliente.java</file>
+            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/model/Cliente.java</file>
+            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/view/PedidoFormularioView.java</file>
+            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/view/SaborFormularioView.java</file>
             <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/model/Pizza.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/controller/ClienteController.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/view/TelaInicial.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/model/dao/ClienteDao.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/controller/BasicClienteController.java</file>
+            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/view/NovoPedidoFormularioView.java</file>
             <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/view/TelaNovoPedido.java</file>
             <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/model/dao/PedidoDao.java</file>
+            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/model/SaborPizza.java</file>
         </group>
     </open-files>
 </project-private>

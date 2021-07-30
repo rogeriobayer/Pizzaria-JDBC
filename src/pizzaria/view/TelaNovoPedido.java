@@ -1,4 +1,5 @@
-package pizzaria.view;
+
+cbx_pedido_sabor1package pizzaria.view;
 
 import java.awt.Component;
 import java.util.ArrayList;
@@ -11,16 +12,18 @@ import pizzaria.model.Circulo;
 import pizzaria.model.Cliente;
 import pizzaria.model.Forma;
 import pizzaria.model.Pedido;
-import pizzaria.model.Pizza;
+import pizzaria.model.PizzaAntiga;
 import pizzaria.model.Quadrado;
 import pizzaria.model.SaborPizza;
 import pizzaria.model.Triangulo;
 import pizzaria.utils.FormaPizzaEnum;
 import pizzaria.utils.TiposPizza;
 
+
+
 public class TelaNovoPedido extends javax.swing.JFrame {
 
-    ArrayList<Pizza> listaPizzas;
+    ArrayList<PizzaAntiga> listaPizzas;
     Pedido clientePedido;
     Cliente clienteSelecionado;
     String modo;
@@ -444,7 +447,7 @@ public class TelaNovoPedido extends javax.swing.JFrame {
             clienteSelecionado.setPedido(clientePedido);
         }
 
-        Pizza novaPizza = new Pizza(clientePedido, forma, isMetricaCmQuadrado, areaTotal, ladoOuRaio, sabor1, sabor2, precoPizza);
+        PizzaAntiga novaPizza = new PizzaAntiga(clientePedido, forma, isMetricaCmQuadrado, areaTotal, ladoOuRaio, sabor1, sabor2, precoPizza);
         listaPizzas.add(novaPizza);
         clientePedido.addPizza(novaPizza);
         clientePedido.setPreco(clientePedido.getPreco() + precoPizza);
@@ -459,7 +462,7 @@ public class TelaNovoPedido extends javax.swing.JFrame {
     private void btn_pedido_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pedido_excluirActionPerformed
         int index = tb_pizzas.getSelectedRow();
         if (index >= 0 && index < listaPizzas.size()) {
-            Pizza pizzaParaExcluir = listaPizzas.get(index);
+            PizzaAntiga pizzaParaExcluir = listaPizzas.get(index);
             clientePedido.setPreco(clientePedido.getPreco() - pizzaParaExcluir.getPrecoTotal());
             label_preco_total.setText(String.valueOf(clientePedido.getPreco()));
             listaPizzas.remove(index);
