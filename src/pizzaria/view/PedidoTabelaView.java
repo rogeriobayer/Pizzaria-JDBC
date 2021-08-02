@@ -1,6 +1,7 @@
 package pizzaria.view;
 
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import pizzaria.controller.PedidoController;
 
 public class PedidoTabelaView extends javax.swing.JPanel {
@@ -42,7 +43,7 @@ public class PedidoTabelaView extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tabelaPedido);
 
-        btn_pedido_listar.setText("Listar Todos");
+        btn_pedido_listar.setText("Atualizar lista de Pedidos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -74,6 +75,11 @@ public class PedidoTabelaView extends javax.swing.JPanel {
 
     public void setController(PedidoController controller) {
         this.btn_pedido_listar.addActionListener(e -> controller.listarPedido());
+    }
+
+    public void setControllerNovoPedido(PedidoController controller) {
+        this.btn_pedido_listar.addActionListener(e -> controller.listarPedidoClienteSelecionado());
+        tabelaPedido.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     public JTable getTabelaPedido() {

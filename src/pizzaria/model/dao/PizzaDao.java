@@ -26,7 +26,7 @@ public class PizzaDao {
     public void inserir(Pizza pizza) {
         Connection connection = connectionFactory.getConnection();
         try {
-            PreparedStatement stmtAdiciona = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement stmtAdiciona = connection.prepareStatement(insert);
             stmtAdiciona.setString(1, pizza.getId());
             stmtAdiciona.setString(2, pizza.getPedido());
             stmtAdiciona.setInt(3, pizza.getNumberForma());

@@ -13,14 +13,19 @@ public class Circulo extends Forma {
     public double calcularLadoOuRaio(double area) {
         return Math.sqrt(area / Math.PI);
     }
-    
+
     @Override
     public int getForma() {
         return FormaPizzaEnum.CIRCULO;
     }
-    
+
     @Override
     public String getNomeForma() {
         return "Círculo";
+    }
+
+    @Override
+    public Integer getNumberForma() {
+        return 1;
     }
 }

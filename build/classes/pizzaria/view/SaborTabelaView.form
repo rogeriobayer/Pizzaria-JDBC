@@ -64,7 +64,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="btn_cliente_listar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Listar Todos"/>
+        <Property name="text" type="java.lang.String" value="Atualizar lista de Sabores"/>
       </Properties>
     </Component>
   </SubComponents>

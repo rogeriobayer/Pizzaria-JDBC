@@ -8,6 +8,7 @@ package pizzaria.controller;
 import pizzaria.model.dao.ConnectionFactory;
 import pizzaria.model.dao.ClienteDao;
 import pizzaria.model.dao.PedidoDao;
+import pizzaria.model.dao.PizzaDao;
 import pizzaria.model.dao.SaborDao;
 import pizzaria.model.dao.TipoDao;
 import pizzaria.view.TelaCliente;

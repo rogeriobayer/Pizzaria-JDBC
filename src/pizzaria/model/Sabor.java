@@ -60,4 +60,9 @@ public class Sabor {
         }
         return null;
     }
+
+    @Override
+    public String toString() {
+        return this.nome;
+    }
 }

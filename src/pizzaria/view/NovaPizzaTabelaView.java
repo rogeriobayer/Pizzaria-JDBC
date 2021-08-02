@@ -1,11 +1,11 @@
 package pizzaria.view;
 
 import javax.swing.JTable;
-import pizzaria.controller.ClienteController;
+import pizzaria.controller.PizzaController;
 
-public class NovoPedidoTabelaView extends javax.swing.JPanel {
+public class NovaPizzaTabelaView extends javax.swing.JPanel {
 
-    public NovoPedidoTabelaView() {
+    public NovaPizzaTabelaView() {
         initComponents();
     }
 
@@ -14,10 +14,10 @@ public class NovoPedidoTabelaView extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaNovoPedido = new javax.swing.JTable();
-        btn_novopedido_listar = new javax.swing.JButton();
+        tabelaPizza = new javax.swing.JTable();
+        btn_novapizza_listar = new javax.swing.JButton();
 
-        tabelaNovoPedido.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaPizza.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -40,9 +40,9 @@ public class NovoPedidoTabelaView extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tabelaNovoPedido);
+        jScrollPane1.setViewportView(tabelaPizza);
 
-        btn_novopedido_listar.setText("Listar Todos");
+        btn_novapizza_listar.setText("Atualizar lista de Pizzas do Pedido");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -52,7 +52,7 @@ public class NovoPedidoTabelaView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
-                    .addComponent(btn_novopedido_listar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn_novapizza_listar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -61,22 +61,22 @@ public class NovoPedidoTabelaView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_novopedido_listar)
+                .addComponent(btn_novapizza_listar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_novopedido_listar;
+    private javax.swing.JButton btn_novapizza_listar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabelaNovoPedido;
+    private javax.swing.JTable tabelaPizza;
     // End of variables declaration//GEN-END:variables
 
-    public void setController(ClienteController controller) {
-        this.btn_novopedido_listar.addActionListener(e -> controller.listarCliente());
+    public void setControllerPizza(PizzaController controller) {
+        this.btn_novapizza_listar.addActionListener(e -> controller.listarPizza());
     }
 
-    public JTable getTabelaNovoPedido() {
-        return tabelaNovoPedido;
+    public JTable getTabelaPizza() {
+        return tabelaPizza;
     }
 }

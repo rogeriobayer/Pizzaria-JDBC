@@ -1,90 +1,131 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pizzaria.controller;
 
 import java.util.List;
-import pizzaria.model.Cliente;
-import pizzaria.model.dao.ClienteDao;
-import pizzaria.view.TelaCliente;
+import pizzaria.model.Pedido;
+import pizzaria.model.Pizza;
+import pizzaria.model.dao.ConnectionFactory;
+import pizzaria.model.dao.PizzaDao;
+import pizzaria.view.TelaNovasPizzas;
+import pizzaria.view.TelaNovosPedidos;
 
-public class ClienteController {
+public class PizzaController {
 
-    private TelaCliente view;
-    private ClienteDao modelDao;
+    private TelaNovasPizzas view;
+    private PizzaDao modelDao;
+    private TelaNovosPedidos viewPedidos;
 
-    public ClienteController(TelaCliente view, ClienteDao modelDao) {
+    public PizzaController(TelaNovasPizzas view, PizzaDao modelDao) {
         this.view = view;
         this.modelDao = modelDao;
         initController();
     }
 
-    private void initController() {
-        this.view.setController(this);
-        this.view.initView();
+    public PizzaController(TelaNovosPedidos viewPedidos, PizzaDao modelDao) {
+        this.viewPedidos = viewPedidos;
+        this.modelDao = modelDao;
+        initControllerPedidos();
     }
 
-    public void criarCliente() {
+    private void initController() {
+        this.view.setPizzaController(this);
+        this.view.initPizzasView();
+    }
+
+    private void initControllerPedidos() {
+        this.viewPedidos.setPizzaController(this);
+        this.viewPedidos.initPedidosView();
+    }
+
+    public void criarPizza() {
         try {
-            Cliente cliente = view.getClienteFormulario();
-            modelDao.inserir(cliente);
-            view.inserirClienteView(cliente);
+            System.out.printf(modelDao.toString());
+            Pizza pizza = view.getPizzaFormulario();
+            System.out.printf(pizza.toString());
+            System.out.printf("");
+
+            modelDao.inserir(pizza);
+            view.inserirPizzaView(pizza);
         } catch (Exception ex) {
-            view.apresentaErro("Erro ao criar cliente.");
+            view.apresentaErro(ex.toString());
         }
     }
 
-    public void atualizarCliente() {
+    public void atualizarPizza() {
         try {
-
-            Cliente cliente = view.getClienteParaAtualizar();
-            if (cliente == null) {
-                view.apresentaInfo("Selecione um cliente na tabela para atualizar.");
+            Pizza pizza = view.getPizzaParaAtualizar();
+            if (pizza == null) {
+                viewPedidos.apresentaInfo("Selecione um pizza na tabela para atualizar.");
                 return;
             }
-            modelDao.atualizar(cliente);
-            view.atualizarCliente(cliente);
-
+            modelDao.atualizar(pizza);
+            view.atualizarPizza(pizza);
         } catch (Exception ex) {
-            view.apresentaErro(ex.getMessage());
-
-//            view.apresentaErro("Erro ao atualizar cliente.");
+            viewPedidos.apresentaErro(ex.getMessage());
+//            view.apresentaErro("Erro ao atualizar pizza.");
         }
     }
 
-    public void excluirCliente() {
+    public void excluirPizza() {
         try {
-            List<Cliente> listaParaExcluir = view.getClientesParaExcluir();
+            List<Pizza> listaParaExcluir = view.getPizzasParaExcluir();
             modelDao.excluirLista(listaParaExcluir);
-            view.excluirClientesView(listaParaExcluir);
+            view.excluirPizzasView(listaParaExcluir);
         } catch (Exception ex) {
-            view.apresentaErro("Erro ao excluir clientes.");
+            viewPedidos.apresentaErro("Erro ao excluir pedidos.");
         }
     }
 
-    public void listarCliente() {
+    public void listarPizza() {
         try {
-            List<Cliente> lista = this.modelDao.getLista();
-            view.mostrarListaClientes(lista);
+
+            List<Pizza> lista = this.modelDao.getLista();
+            view.mostrarListaPizzas(lista);
         } catch (Exception ex) {
-            view.apresentaErro("Erro ao listar clientes.");
+            viewPedidos.apresentaErro("Erro ao listar pedidos.");
         }
     }
 
-    public void filtrarClientes() {
+    public void atualizarNovoPizza() {
         try {
+            Pedido pedido = viewPedidos.getPedidoSelecionado();
+            System.out.print(pedido);
+            if (pedido == null || pedido.equals("null")) {
+                viewPedidos.apresentaInfo("Selecione um pedido.");
+                return;
+            }
+            String cliente = viewPedidos.getClienteSelecionado();
 
-            String query = view.getQueryParaFiltrar();
-            List<Cliente> lista = this.modelDao.getListaFiltrada(query);
+            view = new TelaNovasPizzas(pedido, cliente);
+            PizzaDao pedidoDao = new PizzaDao(new ConnectionFactory());
+            PizzaController pizzaController = new PizzaController(view, pedidoDao);
+            view.setVisible(true);
 
-            view.mostrarListaClientes(lista);
-
-            view.cleanFilterQuery();
         } catch (Exception ex) {
-//
-            view.apresentaErro("Erro ao filtrar clientes.");
+            viewPedidos.apresentaErro("Erro ao abrir a tela Nova Pizza.");
+        }
+    }
+
+    public void abrirNovoPizza() {
+        try {
+            String cliente = viewPedidos.getClienteSelecionado();
+            view = new TelaNovasPizzas(cliente);
+            PizzaDao pedidoDao = new PizzaDao(new ConnectionFactory());
+            PizzaController pizzaController = new PizzaController(view, pedidoDao);
+            view.setVisible(true);
+
+        } catch (Exception ex) {
+            viewPedidos.apresentaErro("Erro ao abrir a tela Nova Pizza.");
+        }
+    }
+
+    public void fecharNovaPizza() {
+        try {
+            view.setVisible(false);
+
+//            List<Cliente> lista = this.modelDao.getLista();
+//            view.mostrarListaClientes(lista);
+        } catch (Exception ex) {
+            viewPedidos.apresentaErro("Erro ao listar clientes.");
         }
     }
 

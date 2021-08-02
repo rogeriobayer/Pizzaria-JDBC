@@ -18,6 +18,7 @@ public class PedidoDao {
     private final String select = "select * from pedidos";
     private final String update = "update pedidos set  preco=?, id_cliente=?, estado=? WHERE id=?";
     private final String delete = "delete from pedidos WHERE id=?";
+    private final String selectWhere = "select * from pedidos where id_cliente = ?";
 
     public PedidoDao(ConnectionFactory conFactory) {
         this.connectionFactory = conFactory;
@@ -29,7 +30,7 @@ public class PedidoDao {
             // prepared statement para inserção
             PreparedStatement stmtAdiciona = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             // seta os valores
-            stmtAdiciona.setString(1, UUID.randomUUID().toString()); ///pedido.getId()
+            stmtAdiciona.setString(1, pedido.getId());
             stmtAdiciona.setDouble(2, pedido.getPreco());
             stmtAdiciona.setString(3, pedido.getIdCliente());
             stmtAdiciona.setInt(4, pedido.getEstado());
@@ -45,6 +46,32 @@ public class PedidoDao {
         ResultSet rs = null;
         PreparedStatement stmtLista = connection.prepareStatement(select);
         try {
+            rs = stmtLista.executeQuery();
+            List<Pedido> pedidos = new ArrayList();
+            while (rs.next()) {
+                String id = rs.getString("id");
+                Double preco = rs.getDouble("preco");
+                String idCliente = rs.getString("id_cliente");
+                Integer estado = rs.getInt("estado");
+                pedidos.add(new Pedido(id, idCliente, preco, estado));
+            }
+            return pedidos;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            rs.close();
+            stmtLista.close();
+        }
+
+    }
+
+    public List<Pedido> getListaPorCliente(String id_cliente) throws SQLException {
+        Connection connection = connectionFactory.getConnection();
+        ResultSet rs = null;
+        PreparedStatement stmtLista = connection.prepareStatement(selectWhere);
+        try {
+            stmtLista.setString(1, id_cliente); ///pedido.getId()
+
             rs = stmtLista.executeQuery();
             List<Pedido> pedidos = new ArrayList();
             while (rs.next()) {

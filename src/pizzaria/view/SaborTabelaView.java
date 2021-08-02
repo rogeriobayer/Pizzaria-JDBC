@@ -46,7 +46,7 @@ public class SaborTabelaView extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tabelaSabor);
 
-        btn_cliente_listar.setText("Listar Todos");
+        btn_cliente_listar.setText("Atualizar lista de Sabores");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

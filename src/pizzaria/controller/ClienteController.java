@@ -6,8 +6,11 @@
 package pizzaria.controller;
 
 import java.util.List;
+import static javax.swing.JOptionPane.showMessageDialog;
 import pizzaria.model.Cliente;
 import pizzaria.model.dao.ClienteDao;
+import pizzaria.model.dao.ConnectionFactory;
+import pizzaria.model.dao.PedidoDao;
 import pizzaria.view.TelaCliente;
 
 public class ClienteController {
@@ -26,9 +29,24 @@ public class ClienteController {
         this.view.initView();
     }
 
+    private boolean validaTelefone(String telefone) {
+        if (telefone.matches("[0-9]+") && telefone.length() > 9 && telefone.length() < 12) {
+            return true;
+        } else {
+            view.apresentaInfo("Telefone inválido. Digite seu telefone com DDD.");
+            return false;
+        }
+    }
+
     public void criarCliente() {
         try {
             Cliente cliente = view.getClienteFormulario();
+            if (cliente.getTelefone().isEmpty() || cliente.getNome().isEmpty() || cliente.getSobrenome().isEmpty()) {
+                view.apresentaInfo("Preecha todos os campos corretamente para adicionar novo cliente.");
+                return;
+            } else if (!validaTelefone(cliente.getTelefone())) {
+                return;
+            }
             modelDao.inserir(cliente);
             view.inserirClienteView(cliente);
         } catch (Exception ex) {
@@ -57,6 +75,10 @@ public class ClienteController {
     public void excluirCliente() {
         try {
             List<Cliente> listaParaExcluir = view.getClientesParaExcluir();
+            if (listaParaExcluir == null) {
+                view.apresentaInfo("Selecione um cliente na tabela para atualizar.");
+                return;
+            }
             modelDao.excluirLista(listaParaExcluir);
             view.excluirClientesView(listaParaExcluir);
         } catch (Exception ex) {
@@ -83,7 +105,6 @@ public class ClienteController {
 
             view.cleanFilterQuery();
         } catch (Exception ex) {
-//
             view.apresentaErro("Erro ao filtrar clientes.");
         }
     }
