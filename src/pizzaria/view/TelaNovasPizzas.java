@@ -128,9 +128,10 @@ public class TelaNovasPizzas extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 //Pizza
     private int pizzaClicadoParaAtualizacao = -1;
-    private NovaPizzaTableModel pizzaTableModel = new NovaPizzaTableModel();
+    private NovaPizzaTableModel pizzaTableModel;
 
-    public void initPizzasView() {
+    public void initPizzasView() throws SQLException {
+        pizzaTableModel = new NovaPizzaTableModel();
         novaPizzaTabelaView.getTabelaPizza().setModel(pizzaTableModel);
         novaPizzaTabelaView.getTabelaPizza().addMouseListener(new MouseAdapter() {
             @Override
