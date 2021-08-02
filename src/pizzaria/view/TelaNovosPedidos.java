@@ -141,14 +141,10 @@ public class TelaNovosPedidos extends javax.swing.JFrame {
         pedidoTabelaView.setControllerNovoPedido(pedidoController);
         novoPedidoFormularioView.setPedidoController(pedidoController);
         this.btn_voltarprincipal.addActionListener(e -> pedidoController.fecharNovoPedido());
-
-        System.out.print("setPedidoController");
-
     }
 
     public void setPizzaController(PizzaController controller) {
 //        pedidoTabelaView.setController(controller);
-        System.out.print("setPizzaController");
         novoPedidoFormularioView.setPizzaController(controller);
 //        clienteFormularioPedidoView.setController(controller);
     }

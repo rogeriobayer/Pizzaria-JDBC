@@ -54,9 +54,6 @@ public class NovaPizzaTableModel extends AbstractTableModel {
 
     private String getSaborStringById(String id) throws SQLException {
         for (Sabor s : this.saboresList) {
-            System.out.print("S" + s.getId());
-            System.out.print("Sid" + id);
-
             if (s.getId().equals(id)) {
                 return s.getNome();
             }

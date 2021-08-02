@@ -87,8 +87,6 @@ public class Pedido {
     }
 
     public String getTelefone() throws SQLException {
-        System.out.print(this.idCliente);
-
         return this.modelDao.getTelefone(this.idCliente);
     }
 

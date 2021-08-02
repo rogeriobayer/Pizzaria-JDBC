@@ -122,9 +122,9 @@
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="r_pizza_cm" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="r_pedido_cm_quadrados" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="r_pedido_cm_quadrados" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">

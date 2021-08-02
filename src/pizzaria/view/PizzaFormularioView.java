@@ -194,7 +194,7 @@ public class PizzaFormularioView extends javax.swing.JPanel {
                             .addComponent(jLabel1)
                             .addComponent(c_tamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(r_pizza_cm)
                     .addComponent(r_pedido_cm_quadrados))
                 .addGap(20, 20, 20)

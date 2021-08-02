@@ -164,8 +164,6 @@ public class ClienteDao {
             rs = stmtLista.executeQuery();
             while (rs.next()) {
                 phone = rs.getString("telefone");
-                System.out.print("asjiijasd" + phone);
-
             }
 
             return phone;

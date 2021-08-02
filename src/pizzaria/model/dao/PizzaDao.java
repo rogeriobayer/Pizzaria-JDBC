@@ -1,11 +1,9 @@
 package pizzaria.model.dao;
 
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import pizzaria.model.Pizza;
@@ -18,6 +16,9 @@ public class PizzaDao {
     private final String selectWhere = "select * from pizzas where id =?";
     private final String update = "update pizzas set forma=?, centimetro_quadrado=?, area=?, raio=?, id_sabor1=?, id_sabor2=?, preco=? WHERE id=?";
     private final String delete = "delete from pizzas WHERE id=?";
+    private final String selectIDSabor1 = "select tipo from sabores where id=?";
+    private final String selectIDSabor2 = "select tipo from sabores where id=?";
+    private final String selectValorTipo = "select preco from tipo_pizza where id=?";/// HERE
 
     public PizzaDao(ConnectionFactory conFactory) {
         this.connectionFactory = conFactory;
@@ -139,7 +140,80 @@ public class PizzaDao {
         } finally {
             stmtExcluir.close();
         }
-
     }
 
+    public Double getPrecoSabor1(String idPizza1) throws SQLException {
+        Connection connection = connectionFactory.getConnection();
+        ResultSet rs = null;
+        ResultSet rs2 = null;
+
+        PreparedStatement stmtIdSabor = connection.prepareStatement(selectIDSabor1);
+        PreparedStatement stmtPreco = connection.prepareStatement(selectValorTipo);
+        Double preco = 0.0;
+        String id = null;
+        try {
+            stmtIdSabor.setString(1, idPizza1);
+
+            rs = stmtIdSabor.executeQuery();
+            if (rs != null && rs.next()) {
+                id = rs.getString("tipo");
+            }
+            System.out.print("IDDD" + id);
+
+            stmtPreco.setString(1, id);
+            rs2 = stmtPreco.executeQuery();
+            if (rs2 != null && rs2.next()) {
+
+                preco = rs2.getDouble("preco");
+            }
+            System.out.print("PRECO" + preco);
+            return preco;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            rs.close();
+            rs2.close();
+            stmtPreco.close();
+            stmtIdSabor.close();
+
+        }
+    }
+
+    public Double getPrecoSabor2(String idPizza2) throws SQLException {
+        Connection connection = connectionFactory.getConnection();
+        ResultSet rs = null;
+        ResultSet rs2 = null;
+
+        PreparedStatement stmtIdSabor = connection.prepareStatement(selectIDSabor2);
+        PreparedStatement stmtPreco = connection.prepareStatement(selectValorTipo);
+        Double preco = 0.0;
+        String id = null;
+        try {
+            stmtIdSabor.setString(1, idPizza2);
+
+            rs = stmtIdSabor.executeQuery();
+            if (rs != null && rs.next()) {
+                id = rs.getString("tipo");
+            }
+            System.out.print("IDDD" + id);
+
+            stmtPreco.setString(1, id);
+            rs2 = stmtPreco.executeQuery();
+            if (rs2 != null && rs2.next()) {
+
+                preco = rs2.getDouble("preco");
+            }
+            System.out.print("PRECO" + preco);
+            return preco;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            rs.close();
+            rs2.close();
+
+            stmtPreco.close();
+            stmtIdSabor.close();
+
+        }
+    }
 }

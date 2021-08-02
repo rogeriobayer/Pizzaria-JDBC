@@ -203,11 +203,8 @@ public class TelaNovasPizzas extends javax.swing.JFrame {
         String sabor2 = pizzaFormularioView.getCampoSabor2().getId();
 
         Boolean isMetricaCmQuadrado = pizzaFormularioView.getPizzaCm().isSelected();
-        System.out.print("Pedido" + this.pedidoSelecionado);
 
         if (this.pedidoSelecionado == null) {
-            System.out.print("AS YOUR FREND");
-
             this.pedidoSelecionado = new Pedido(this.clienteSelecionado, 0, 0);
             PedidoDao pedidoDao = new PedidoDao(new ConnectionFactory());
             pedidoDao.inserir(pedidoSelecionado);
