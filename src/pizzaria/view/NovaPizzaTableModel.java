@@ -3,16 +3,19 @@ package pizzaria.view;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 import pizzaria.model.Pizza;
 import pizzaria.model.Sabor;
-import pizzaria.model.dao.PizzaDao;
+import pizzaria.model.dao.ConnectionFactory;
 import pizzaria.model.dao.SaborDao;
 
 public class NovaPizzaTableModel extends AbstractTableModel {
 
     private String[] colunas = new String[]{"Sabor 1", "Sabor 2", "Forma", "Área", "Lado ou Raio", "Preço"};
-    private SaborDao modelDao;
+    private SaborDao modelDao = new SaborDao(new ConnectionFactory());
+
     private List<Sabor> saboresList;
 
     private List<Pizza> lista = new ArrayList();
@@ -22,7 +25,8 @@ public class NovaPizzaTableModel extends AbstractTableModel {
         this.lista = lista;
     }
 
-    public NovaPizzaTableModel() {
+    public NovaPizzaTableModel() throws SQLException {
+        this.saboresList = modelDao.getLista();
     }
 
     @Override
@@ -48,8 +52,11 @@ public class NovaPizzaTableModel extends AbstractTableModel {
         //return true;
     }
 
-    private String getSaborStringById(String id) {
-        for (Sabor s : saboresList) {
+    private String getSaborStringById(String id) throws SQLException {
+        for (Sabor s : this.saboresList) {
+            System.out.print("S" + s.getId());
+            System.out.print("Sid" + id);
+
             if (s.getId().equals(id)) {
                 return s.getNome();
             }
@@ -71,10 +78,20 @@ public class NovaPizzaTableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         Pizza pizza = lista.get(rowIndex);
         switch (columnIndex) {
-            case 0:
-                return getSaborStringById(pizza.getSabor1());//if column 0 (code)
-            case 1:
-                return getSaborStringById(pizza.getSabor2());//if column 1 (name)
+            case 0: {
+                try {
+                    return this.getSaborStringById(pizza.getSabor1());//if column 0 (code)
+                } catch (SQLException ex) {
+                    Logger.getLogger(NovaPizzaTableModel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            case 1: {
+                try {
+                    return this.getSaborStringById(pizza.getSabor2());//if column 1 (name)
+                } catch (SQLException ex) {
+                    Logger.getLogger(NovaPizzaTableModel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
             case 2:
                 return pizza.getFormaString();//if column 2 (birthday)
             case 3:
