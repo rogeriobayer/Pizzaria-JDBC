@@ -193,6 +193,11 @@ public class TelaNovasPizzas extends javax.swing.JFrame {
 
     public void atualizarPizza(Pizza pizza) {
         pizzaTableModel.fireTableRowsUpdated(pizzaClicadoParaAtualizacao, pizzaClicadoParaAtualizacao);
+
+    }
+
+    public void atualizarTotal(Double valor) {
+        pizzaFormularioView.setPrecoTotal(valor);
     }
 
     public Pizza getPizzaFormulario() {
