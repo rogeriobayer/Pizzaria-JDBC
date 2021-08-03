@@ -62,7 +62,7 @@ public class SaborController {
             modelDao.excluirLista(listaParaExcluir);
             view.excluirSaboresView(listaParaExcluir);
         } catch (Exception ex) {
-            view.apresentaErro("Erro ao excluir sabores.");
+            view.apresentaErro("Erro ao excluir sabor. O sabor é utilizado por um ou mais pedidos no sistema.");
         }
     }
 

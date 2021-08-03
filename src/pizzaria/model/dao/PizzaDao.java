@@ -18,6 +18,7 @@ public class PizzaDao {
     private final String selectWhere = "select * from pizzas where id =?";
     private final String update = "update pizzas set forma=?, centimetro_quadrado=?, area=?, raio=?, id_sabor1=?, id_sabor2=?, preco=? WHERE id=?";
     private final String delete = "delete from pizzas WHERE id=?";
+    private final String deleteByOrder = "delete from pizzas WHERE id_pedido=?";
     private final String selectIDSabor1 = "select tipo from sabores where id=?";
     private final String selectIDSabor2 = "select tipo from sabores where id=?";
     private final String selectValorTipo = "select preco from tipo_pizza where id=?";
@@ -178,6 +179,18 @@ public class PizzaDao {
         stmtExcluir = connection.prepareStatement(delete);
         try {
             stmtExcluir.setString(1, pizza.getId());
+            stmtExcluir.executeUpdate();
+        } finally {
+            stmtExcluir.close();
+        }
+    }
+
+    public void excludeByOrderId(String pedido_id) throws SQLException {
+        Connection connection = connectionFactory.getConnection();
+        PreparedStatement stmtExcluir;
+        stmtExcluir = connection.prepareStatement(deleteByOrder);
+        try {
+            stmtExcluir.setString(1, pedido_id);
             stmtExcluir.executeUpdate();
         } finally {
             stmtExcluir.close();

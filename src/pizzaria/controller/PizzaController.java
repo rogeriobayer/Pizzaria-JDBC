@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.util.List;
-import static javax.swing.JOptionPane.showMessageDialog;
 import pizzaria.model.Forma;
 import pizzaria.model.Pedido;
 import pizzaria.model.Pizza;
@@ -134,6 +133,7 @@ public class PizzaController {
             }
             modelDao.excluirLista(listaParaExcluir);
             view.excluirPizzasView(listaParaExcluir);
+            view.atualizarTotal(modelDao.recalcTotal(listaParaExcluir.get(0).getPedido()));
         } catch (Exception ex) {
             view.apresentaErro("Erro ao excluir pedidos.");
         }
