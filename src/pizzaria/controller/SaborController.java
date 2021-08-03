@@ -24,6 +24,10 @@ public class SaborController {
     public void criarSabor() {
         try {
             Sabor sabor = view.getSaborFormulario();
+            if (sabor == null || sabor.getNome().isEmpty()) {
+                view.apresentaInfo("Preencha corretamente os campos para criar novo sabor");
+                return;
+            }
             modelDao.inserir(sabor);
             view.inserirSaborView(sabor);
         } catch (Exception ex) {
@@ -36,7 +40,7 @@ public class SaborController {
         try {
 
             Sabor sabor = view.getSaborParaAtualizar();
-            if (sabor == null) {
+            if (sabor == null || sabor.getNome().isEmpty()) {
                 view.apresentaInfo("Selecione um sabor na tabela para atualizar.");
                 return;
             }
