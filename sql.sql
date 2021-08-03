@@ -61,9 +61,6 @@ constraint pk_pizza PRIMARY KEY (id),
 );
   
 
-
-
-
 CREATE TABLE livro
 (id int(4) AUTO_INCREMENT,
 titulo varchar(45),
