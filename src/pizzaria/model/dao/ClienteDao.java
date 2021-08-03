@@ -11,7 +11,6 @@ import java.util.List;
 import pizzaria.model.Cliente;
 
 public class ClienteDao {
-// a conexão com o banco de dados
 
     private ConnectionFactory connectionFactory;
     private final String insert = "insert into clientes (id, nome,sobrenome,telefone) values (?,?,?,?)";
@@ -28,21 +27,13 @@ public class ClienteDao {
     public void inserir(Cliente cliente) {
         Connection connection = connectionFactory.getConnection();
         try {
-            // prepared statement para inserção
             PreparedStatement stmtAdiciona = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            // seta os valores
             stmtAdiciona.setString(1, cliente.getId());
             stmtAdiciona.setString(2, cliente.getNome());
             stmtAdiciona.setString(3, cliente.getSobrenome());
             stmtAdiciona.setString(4, cliente.getTelefone());
-//            stmtAdiciona.setArray(5, cliente.getArray());
-            // executa
             stmtAdiciona.execute();
-            //Seta o id do cliente
-//            ResultSet rs = stmtAdiciona.getGeneratedKeys();
-//            rs.next();
-//            long i = rs.getLong(1);
-//            cliente.setId(i);
+
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

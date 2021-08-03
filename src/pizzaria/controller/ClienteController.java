@@ -50,7 +50,7 @@ public class ClienteController {
             modelDao.inserir(cliente);
             view.inserirClienteView(cliente);
         } catch (Exception ex) {
-            view.apresentaErro("Erro ao criar cliente.");
+            view.apresentaErro("Erro ao criar cliente. Verifique se o telefone já foi utilizado.");
         }
     }
 
