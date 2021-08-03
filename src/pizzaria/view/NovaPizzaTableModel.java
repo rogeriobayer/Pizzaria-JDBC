@@ -89,46 +89,21 @@ public class NovaPizzaTableModel extends AbstractTableModel {
         }
     }
 
-//    @Override
-//    public void setValueAt(Object value, int row, int col) {
-//        Pizza pizza = lista.get(row);
-//        switch (col) {
-//            case 0:
-//                pizza.setId((String) value); //if column 0 (code)
-//                break;
-//            case 1:
-//                pizza.setNome((String) value);
-//                break;
-//            case 2:
-//                pizza.setSobrenome((String) value);
-//                break;
-//            case 3:
-//                pizza.setTelefone((String) value);
-//                break;
-////            case 4:
-////                pizza.setEndereco((String) value);
-////                break;
-//            default:
-//        }
-//        this.fireTableCellUpdated(row, col);
-//    }
     public boolean removePizza(Pizza pizza) {
         int linha = this.lista.indexOf(pizza);
         boolean result = this.lista.remove(pizza);
-        this.fireTableRowsDeleted(linha, linha);//update JTable
+        this.fireTableRowsDeleted(linha, linha);
         return result;
     }
 
     public void adicionaPizza(Pizza pizza) {
         this.lista.add(pizza);
-        //this.fireTableDataChanged();
-        this.fireTableRowsInserted(lista.size() - 1, lista.size() - 1);//update JTable
+        this.fireTableRowsInserted(lista.size() - 1, lista.size() - 1);
     }
 
     public void setListaPizzas(List<Pizza> pizza) {
         this.lista = pizza;
         this.fireTableDataChanged();
-        //this.fireTableRowsInserted(0,contatos.size()-1);//update JTable
     }
 
     public void limpaTabela() {
@@ -137,7 +112,7 @@ public class NovaPizzaTableModel extends AbstractTableModel {
             indice = 0;
         }
         this.lista = new ArrayList();
-        this.fireTableRowsDeleted(0, indice);//update JTable
+        this.fireTableRowsDeleted(0, indice);
     }
 
     public Pizza getPizza(int linha) {

@@ -7,11 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import pizzaria.model.Pedido;
 
 public class PedidoDao {
-// a conexão com o banco de dados
 
     private ConnectionFactory connectionFactory;
     private final String insert = "insert into pedidos (id,preco,id_cliente,estado) values (?,?,?,?)";
@@ -27,14 +25,11 @@ public class PedidoDao {
     public void inserir(Pedido pedido) {
         Connection connection = connectionFactory.getConnection();
         try {
-            // prepared statement para inserção
             PreparedStatement stmtAdiciona = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            // seta os valores
             stmtAdiciona.setString(1, pedido.getId());
             stmtAdiciona.setDouble(2, pedido.getPreco());
             stmtAdiciona.setString(3, pedido.getIdCliente());
             stmtAdiciona.setInt(4, pedido.getEstado());
-            // executa
             stmtAdiciona.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -70,8 +65,7 @@ public class PedidoDao {
         ResultSet rs = null;
         PreparedStatement stmtLista = connection.prepareStatement(selectWhere);
         try {
-            stmtLista.setString(1, id_cliente); ///pedido.getId()
-
+            stmtLista.setString(1, id_cliente);
             rs = stmtLista.executeQuery();
             List<Pedido> pedidos = new ArrayList();
             while (rs.next()) {

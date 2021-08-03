@@ -6,16 +6,16 @@ import pizzaria.model.Pedido;
 import pizzaria.model.dao.ConnectionFactory;
 import pizzaria.model.dao.PedidoDao;
 import pizzaria.model.dao.PizzaDao;
-import pizzaria.view.TelaCliente;
+import pizzaria.view.TelaPrincipal;
 import pizzaria.view.TelaNovosPedidos;
 
 public class PedidoController {
 
-    private TelaCliente view;
+    private TelaPrincipal view;
     private PedidoDao modelDao;
     private TelaNovosPedidos viewPedidos;
 
-    public PedidoController(TelaCliente view, PedidoDao modelDao) {
+    public PedidoController(TelaPrincipal view, PedidoDao modelDao) {
         this.view = view;
         this.modelDao = modelDao;
         initController();

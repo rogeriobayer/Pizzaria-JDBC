@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pizzaria.view;
 
 import java.util.ArrayList;
@@ -40,9 +35,6 @@ public class SaborTableModel extends AbstractTableModel {
     @Override
     public boolean isCellEditable(int row, int column) {
         return false;
-        //if(column==0)
-        //    return false;
-        //return true;
     }
 
     @Override
@@ -50,11 +42,11 @@ public class SaborTableModel extends AbstractTableModel {
         Sabor sabor = lista.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return sabor.getId();//if column 0 (
+                return sabor.getId();
             case 1:
-                return sabor.getNome();//if column 1
+                return sabor.getNome();
             case 2:
-                return sabor.getTipoString();//if column 2
+                return sabor.getTipoString();
             default:
                 return null;
         }
@@ -65,7 +57,7 @@ public class SaborTableModel extends AbstractTableModel {
         Sabor sabor = lista.get(row);
         switch (col) {
             case 0:
-                sabor.setId((String) value); //if column 0 (code)
+                sabor.setId((String) value);
                 break;
             case 1:
                 sabor.setNome((String) value);
@@ -81,20 +73,18 @@ public class SaborTableModel extends AbstractTableModel {
     public boolean removeSabor(Sabor sabor) {
         int linha = this.lista.indexOf(sabor);
         boolean result = this.lista.remove(sabor);
-        this.fireTableRowsDeleted(linha, linha);//update JTable
+        this.fireTableRowsDeleted(linha, linha);
         return result;
     }
 
     public void adicionaSabor(Sabor sabor) {
         this.lista.add(sabor);
-        //this.fireTableDataChanged();
-        this.fireTableRowsInserted(lista.size() - 1, lista.size() - 1);//update JTable
+        this.fireTableRowsInserted(lista.size() - 1, lista.size() - 1);
     }
 
     public void setListaSabores(List<Sabor> sabor) {
         this.lista = sabor;
         this.fireTableDataChanged();
-        //this.fireTableRowsInserted(0,contatos.size()-1);//update JTable
     }
 
     public void limpaTabela() {
@@ -103,7 +93,7 @@ public class SaborTableModel extends AbstractTableModel {
             indice = 0;
         }
         this.lista = new ArrayList();
-        this.fireTableRowsDeleted(0, indice);//update JTable
+        this.fireTableRowsDeleted(0, indice);
     }
 
     public Sabor getSabor(int linha) {

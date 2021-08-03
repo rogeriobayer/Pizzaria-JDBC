@@ -62,38 +62,13 @@ public class Pizza {
         this.id_pedido = id_pedido;
         setFormaFromNumber(id_forma);
         this.isMetricaCmQuadrado = isMetricaCmQuadrado;
-        this.area = 37;
+        this.area = 0;
         this.ladoOuRaio = ladoOuRaio;
         this.id_sabor1 = sabor1;
         this.id_sabor2 = sabor2;
-        this.precoTotal = 37;
+        this.precoTotal = 0;
     }
 
-//    private indexToForma(Integer forma_int){
-//          if (r_pedido_circulo.isSelected()) {
-//            forma = new Circulo();
-//        } else if (r_pedido_quadrado.isSelected()) {
-//            forma = new Quadrado();
-//        } else if (r_pedido_triangulo.isSelected()) {
-//            forma = new Triangulo();
-//        } else {
-//            showMessageDialog(null, "Defina o formato da pizza!");
-//            return;
-//        }
-//    }
-//    public Pizza(String id, String id_pedido, Forma forma, boolean isMetricaCmQuadrado,
-//            double area, double ladoOuRaio, String id_sabor1, String id_sabor2,
-//            double precoTotal) {
-//        this.id = id;
-//        this.id_pedido = id_pedido;
-//        this.forma = forma;
-//        this.isMetricaCmQuadrado = isMetricaCmQuadrado;
-//        this.area = area;
-//        this.ladoOuRaio = ladoOuRaio;
-//        this.id_sabor1 = id_sabor1;
-//        this.id_sabor2 = id_sabor2;
-//        this.precoTotal = precoTotal;
-//    }
     public Pizza() {
     }
 

@@ -206,8 +206,6 @@ public class PizzaFormularioView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void r_pizza_cmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r_pizza_cmActionPerformed
-        // TODO add your handling code here:
-
         if (r_pizza_cm.isSelected()) {
             r_pizza_cm_quadrados.setSelected(false);
         } else {
@@ -228,7 +226,6 @@ public class PizzaFormularioView extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_criarnovoActionPerformed
 
     private void r_pizza_cm_quadradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r_pizza_cm_quadradosActionPerformed
-        // TODO add your handling code here:
         if (r_pizza_cm_quadrados.isSelected()) {
             r_pizza_cm.setSelected(false);
         } else {
