@@ -47,9 +47,6 @@ public class NovaPizzaTableModel extends AbstractTableModel {
     @Override
     public boolean isCellEditable(int row, int column) {
         return false;
-        //if(column==0)
-        //    return false;
-        //return true;
     }
 
     private String getSaborStringById(String id) throws SQLException {
@@ -61,17 +58,7 @@ public class NovaPizzaTableModel extends AbstractTableModel {
         return null;
     }
 
-    private String getSaborIdByString(String string) {
-        for (Sabor s : saboresList) {
-            if (s.getNome().equals(string)) {
-                return s.getId();
-            }
-        }
-        return null;
-    }
-
     @Override
-
     public Object getValueAt(int rowIndex, int columnIndex) {
         Pizza pizza = lista.get(rowIndex);
         switch (columnIndex) {
@@ -90,13 +77,13 @@ public class NovaPizzaTableModel extends AbstractTableModel {
                 }
             }
             case 2:
-                return pizza.getFormaString();//if column 2 (birthday)
+                return pizza.getFormaString();
             case 3:
                 return pizza.getArea();
             case 4:
                 return pizza.getLadoOuRaio();
             case 5:
-                return pizza.getPrecoTotal();
+                return "R$ " + pizza.getPrecoTotal();
             default:
                 return null;
         }
