@@ -252,16 +252,6 @@ public class PizzaFormularioView extends javax.swing.JPanel {
     public JRadioButton getPizzaCm() {
         return r_pizza_cm;
     }
-//
-//
-//
-//    public JTextField getCampoSobrenome() {
-//        return c_cliente_sobrenome;
-//    }
-//
-//    public JTextField getCampoTelefone() {
-//        return c_cliente_telefone;
-//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_atualizar;
     private javax.swing.JButton btn_criarnovo;
@@ -280,23 +270,15 @@ public class PizzaFormularioView extends javax.swing.JPanel {
     private javax.swing.JLabel text_valor_real;
     // End of variables declaration//GEN-END:variables
 
-    public void setPizza(Pizza order) {
+    public void setPizza(Pizza order) throws SQLException {
         this.pizzaSelecionadoParaAtualizacao = order;
-
-//        String[] array = new String[listaSabores.size()];;
-//        for (int i = 0; i < array.length; i++) {
-//            array[i] = array.get(i);
-//
-//        cbx_sabor1.setSelectedIndex(order.getTipo());
-//        cbx_sabor1.setSelectedIndex(order.getTipo());
-        text_valor_real.setText("R$" + order.getPrecoTotal());
+        text_valor_real.setText("R$" + modelDao.getPrecoTotal(order.getPedido()));
         cbx_forma.setSelectedIndex(order.getNumberForma());
         cbx_sabor1.setSelectedItem(order.getSabor1());
         cbx_sabor2.setSelectedItem(order.getSabor2());
         r_pedido_cm_quadrados.setSelected(!order.isIsMetricaCmQuadrado());
         r_pizza_cm.setSelected(order.isIsMetricaCmQuadrado());
         c_tamanho.setText(Double.toString(order.getLadoOuRaio()));
-
     }
 
     public Pizza getPizzaParaAtualizar() {
@@ -319,12 +301,9 @@ public class PizzaFormularioView extends javax.swing.JPanel {
     }
 
     public void setController(PizzaController controller) {
-
         this.btn_criarnovo.addActionListener(e -> controller.criarPizza());
         this.btn_atualizar.addActionListener(e -> controller.atualizarPizza());
         this.btn_excluir.addActionListener(e -> controller.excluirPizza());
-
-//        this.btn_listar.addActionListener(e -> controller.listarCliente());
     }
 
 }

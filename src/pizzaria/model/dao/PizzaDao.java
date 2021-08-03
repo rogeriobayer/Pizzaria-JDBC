@@ -19,15 +19,18 @@ public class PizzaDao {
     private final String selectIDSabor1 = "select tipo from sabores where id=?";
     private final String selectIDSabor2 = "select tipo from sabores where id=?";
     private final String selectValorTipo = "select preco from tipo_pizza where id=?";/// HERE
+    private final String increaseOrderValue = "update pedidos set preco=preco + ? WHERE id=?";
+    private final String decreaseOrderValue = "update pedidos set preco=preco - ? WHERE id=?";
 
     public PizzaDao(ConnectionFactory conFactory) {
         this.connectionFactory = conFactory;
     }
 
-    public void inserir(Pizza pizza) {
+    public void inserir(Pizza pizza) throws SQLException {
         Connection connection = connectionFactory.getConnection();
+        PreparedStatement stmtAdiciona = connection.prepareStatement(insert);
+        PreparedStatement stmtIncrease = connection.prepareStatement(increaseOrderValue);
         try {
-            PreparedStatement stmtAdiciona = connection.prepareStatement(insert);
             stmtAdiciona.setString(1, pizza.getId());
             stmtAdiciona.setString(2, pizza.getPedido());
             stmtAdiciona.setInt(3, pizza.getNumberForma());
@@ -37,10 +40,17 @@ public class PizzaDao {
             stmtAdiciona.setString(7, pizza.getSabor1());
             stmtAdiciona.setString(8, pizza.getSabor2());
             stmtAdiciona.setDouble(9, pizza.getPrecoTotal());
-            // executa
             stmtAdiciona.execute();
+            stmtIncrease.setDouble(1, pizza.getPrecoTotal());
+            stmtIncrease.setString(2, pizza.getPedido());
+            stmtIncrease.execute();
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            stmtAdiciona.close();
+            stmtIncrease.close();
+
         }
     }
 
@@ -158,15 +168,11 @@ public class PizzaDao {
             if (rs != null && rs.next()) {
                 id = rs.getString("tipo");
             }
-            System.out.print("IDDD" + id);
-
             stmtPreco.setString(1, id);
             rs2 = stmtPreco.executeQuery();
             if (rs2 != null && rs2.next()) {
-
                 preco = rs2.getDouble("preco");
             }
-            System.out.print("PRECO" + preco);
             return preco;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -190,27 +196,21 @@ public class PizzaDao {
         String id = null;
         try {
             stmtIdSabor.setString(1, idPizza2);
-
             rs = stmtIdSabor.executeQuery();
             if (rs != null && rs.next()) {
                 id = rs.getString("tipo");
             }
-            System.out.print("IDDD" + id);
-
             stmtPreco.setString(1, id);
             rs2 = stmtPreco.executeQuery();
             if (rs2 != null && rs2.next()) {
-
                 preco = rs2.getDouble("preco");
             }
-            System.out.print("PRECO" + preco);
             return preco;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             rs.close();
             rs2.close();
-
             stmtPreco.close();
             stmtIdSabor.close();
 

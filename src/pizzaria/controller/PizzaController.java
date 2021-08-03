@@ -83,6 +83,33 @@ public class PizzaController {
                 viewPedidos.apresentaInfo("Selecione um pizza na tabela para atualizar.");
                 return;
             }
+
+            Forma forma = pizza.getForma();
+
+            if (pizza.isIsMetricaCmQuadrado()) {
+                pizza.setArea(pizza.getLadoOuRaio());
+                pizza.setLadoOuRaio(forma.calcularLadoOuRaio(pizza.getArea()));
+            } else {
+                pizza.setArea(forma.calcularArea(pizza.getLadoOuRaio()));
+            }
+
+            if (forma.getForma() == FormaPizzaEnum.QUADRADO && (pizza.getLadoOuRaio() < 10 || pizza.getLadoOuRaio() > 40) && !pizza.isIsMetricaCmQuadrado()) {
+                view.apresentaInfo("O tamanho do lado para pizzas quadradas é de no mínimo 10cm e no máximo 40cm");
+                return;
+            } else if (forma.getForma() == FormaPizzaEnum.TRIANGULO && (pizza.getLadoOuRaio() < 20 || pizza.getLadoOuRaio() > 60) && !pizza.isIsMetricaCmQuadrado()) {
+                view.apresentaInfo("O tamanho do lado para pizzas triangulares é de no mínimo 20cm e no máximo 60cm");
+                return;
+            } else if (forma.getForma() == FormaPizzaEnum.CIRCULO && (pizza.getLadoOuRaio() < 7 || pizza.getLadoOuRaio() > 23) && !pizza.isIsMetricaCmQuadrado()) {
+                view.apresentaInfo("O tamanho do raio para pizzas circulares é de no mínimo 10cm e no máximo 23cm");
+                return;
+            } else if (pizza.isIsMetricaCmQuadrado() && (pizza.getArea() < 100 || pizza.getArea() > 1600)) {
+                view.apresentaInfo("O tamanho da área da pizza deve ser de no mínimo 100cm2 e de no máximo 1600cm2");
+                return;
+            }
+            Double preco1 = modelDao.getPrecoSabor1(pizza.getSabor1());
+            Double preco2 = modelDao.getPrecoSabor2(pizza.getSabor2());
+            pizza.setPrecoTotal(((pizza.getArea() * preco1) + (pizza.getArea() * preco2)) / 2);
+
             modelDao.atualizar(pizza);
             view.atualizarPizza(pizza);
         } catch (Exception ex) {

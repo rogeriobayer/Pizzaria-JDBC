@@ -20,7 +20,7 @@ public class SaborDao {
     private final String delete = "delete from sabores WHERE id=?";
     private final String search = "SELECT * FROM sabores WHERE nome LIKE ? OR tipo LIKE ?";
 
-    private final String preco = "select * from tipo_pizza WHERE id=?";
+    private final String preco = "select preco from pedidos WHERE id=?";
 
     public SaborDao(ConnectionFactory conFactory) {
         this.connectionFactory = conFactory;
@@ -138,5 +138,25 @@ public class SaborDao {
             stmtExcluir.close();
         }
 
+    }
+
+    public Double getPrecoTotal(String id) throws SQLException {
+        Connection connection = connectionFactory.getConnection();
+        ResultSet rs = null;
+        PreparedStatement stmtId = connection.prepareStatement(preco);
+        Double preco = 0.0;
+        try {
+            stmtId.setString(1, id);
+            rs = stmtId.executeQuery();
+            if (rs != null && rs.next()) {
+                preco = rs.getDouble("preco");
+            }
+            return preco;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            rs.close();
+            stmtId.close();
+        }
     }
 }

@@ -133,7 +133,11 @@ public class TelaNovasPizzas extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pizzaClicadoParaAtualizacao = novaPizzaTabelaView.getTabelaPizza().rowAtPoint(evt.getPoint());
                 Pizza pizza = pizzaTableModel.getPizza(pizzaClicadoParaAtualizacao);
-                pizzaFormularioView.setPizza(pizza);
+                try {
+                    pizzaFormularioView.setPizza(pizza);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TelaNovasPizzas.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
             }
         });
