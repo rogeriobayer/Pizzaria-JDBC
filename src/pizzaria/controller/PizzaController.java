@@ -1,5 +1,7 @@
 package pizzaria.controller;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.util.List;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -44,7 +46,6 @@ public class PizzaController {
         try {
             Pizza pizza = view.getPizzaFormulario();
             Forma forma = pizza.getForma();
-
             if (pizza.isIsMetricaCmQuadrado()) {
                 pizza.setArea(pizza.getLadoOuRaio());
                 pizza.setLadoOuRaio(forma.calcularLadoOuRaio(pizza.getArea()));
@@ -68,13 +69,14 @@ public class PizzaController {
             Double preco1 = modelDao.getPrecoSabor1(pizza.getSabor1());
             Double preco2 = modelDao.getPrecoSabor2(pizza.getSabor2());
             pizza.setPrecoTotal(((pizza.getArea() * preco1) + (pizza.getArea() * preco2)) / 2);
-
+            BigDecimal bd = new BigDecimal(((pizza.getArea() * preco1) + (pizza.getArea() * preco2)) / 2).setScale(2, RoundingMode.HALF_UP);
+            Double parsedPrice = bd.doubleValue();
+            pizza.setPrecoTotal(parsedPrice);
             modelDao.inserir(pizza);
             view.atualizarTotal(modelDao.recalcTotal(pizza.getPedido()));
-
             view.inserirPizzaView(pizza);
         } catch (Exception ex) {
-            view.apresentaErro(ex.getLocalizedMessage());
+            view.apresentaErro("Erro ao adicionar pizza ao pedido.");
         }
     }
 
@@ -110,15 +112,16 @@ public class PizzaController {
             }
             Double preco1 = modelDao.getPrecoSabor1(pizza.getSabor1());
             Double preco2 = modelDao.getPrecoSabor2(pizza.getSabor2());
-            pizza.setPrecoTotal(((pizza.getArea() * preco1) + (pizza.getArea() * preco2)) / 2);
+            BigDecimal bd = new BigDecimal(((pizza.getArea() * preco1) + (pizza.getArea() * preco2)) / 2).setScale(2, RoundingMode.HALF_UP);
+            Double parsedPrice = bd.doubleValue();
+            pizza.setPrecoTotal(parsedPrice);
 
             modelDao.atualizar(pizza);
             view.atualizarTotal(modelDao.recalcTotal(pizza.getPedido()));
             view.atualizarPizza(pizza);
 
         } catch (Exception ex) {
-            view.apresentaErro(ex.getMessage());
-//            view.apresentaErro("Erro ao atualizar pizza.");
+            view.apresentaErro("Erro ao atualizar pizza.");
         }
     }
 
@@ -132,9 +135,7 @@ public class PizzaController {
             modelDao.excluirLista(listaParaExcluir);
             view.excluirPizzasView(listaParaExcluir);
         } catch (Exception ex) {
-            view.apresentaErro(ex.toString());
-
-//            view.apresentaErro("Erro ao excluir pedidos.");
+            view.apresentaErro("Erro ao excluir pedidos.");
         }
     }
 
@@ -145,12 +146,9 @@ public class PizzaController {
                 view.apresentaInfo("Não há pizzas nesse pedido");
                 return;
             }
-            System.out.print(lista);
             view.mostrarListaPizzas(lista);
         } catch (Exception ex) {
-            view.apresentaErro(ex.getLocalizedMessage());
-
-//            view.apresentaErro("Erro ao listar pedidos.");
+            view.apresentaInfo("Não há pizzas cadastradas para esse pedido.");
         }
     }
 
@@ -169,9 +167,7 @@ public class PizzaController {
             view.setVisible(true);
 
         } catch (Exception ex) {
-            view.apresentaErro(ex.toString());
-
-//            viewPedidos.apresentaErro("Erro ao abrir a tela Nova Pizza.");
+            viewPedidos.apresentaErro("Erro ao abrir a tela Nova Pizza.");
         }
     }
 
@@ -184,22 +180,15 @@ public class PizzaController {
             view.setVisible(true);
 
         } catch (Exception ex) {
-            view.apresentaErro(ex.toString());
-
-//            view.apresentaErro("Erro ao abrir a tela Nova Pizza.");
+            view.apresentaErro("Erro ao abrir a tela Nova Pizza.");
         }
     }
 
     public void fecharNovaPizza() {
         try {
             view.setVisible(false);
-
-//            List<Cliente> lista = this.modelDao.getLista();
-//            view.mostrarListaClientes(lista);
         } catch (Exception ex) {
-            view.apresentaErro(ex.toString());
-
-//            viewPedidos.apresentaErro("Erro ao listar clientes.");
+            viewPedidos.apresentaErro("Erro ao fechar a tela de novas pizzas.");
         }
     }
 
