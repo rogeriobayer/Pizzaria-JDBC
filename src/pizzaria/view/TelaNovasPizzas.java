@@ -21,24 +21,24 @@ public class TelaNovasPizzas extends javax.swing.JFrame {
     private String clienteSelecionado;
     private PedidoDao modelDao;
 
-    public TelaNovasPizzas(Pedido pedidoSelecionadoParaAtualizacao, String cliente) {
+    public TelaNovasPizzas(Pedido pedidoSelecionadoParaAtualizacao, String cliente) throws SQLException {
         initComponents();
         this.pedidoSelecionado = pedidoSelecionadoParaAtualizacao;
         this.clienteSelecionado = cliente;
     }
 
-    public TelaNovasPizzas(String cliente) {
+    public TelaNovasPizzas(String cliente) throws SQLException {
         initComponents();
         this.clienteSelecionado = cliente;
     }
 
-    public TelaNovasPizzas() {
+    public TelaNovasPizzas() throws SQLException {
         initComponents();
     }
 
-    @SuppressWarnings("uncheckesd")
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents() throws SQLException {
 
         novaPizzaTabelaView = new pizzaria.view.NovaPizzaTabelaView();
         btn_voltarpedidos = new javax.swing.JButton();
@@ -111,7 +111,11 @@ public class TelaNovasPizzas extends javax.swing.JFrame {
         //</editor-fold>
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaNovasPizzas().setVisible(true);
+                try {
+                    new TelaNovasPizzas().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TelaNovasPizzas.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
