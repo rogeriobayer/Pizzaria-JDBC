@@ -70,6 +70,8 @@ public class PizzaController {
             pizza.setPrecoTotal(((pizza.getArea() * preco1) + (pizza.getArea() * preco2)) / 2);
 
             modelDao.inserir(pizza);
+            view.atualizarTotal(modelDao.recalcTotal(pizza.getPedido()));
+
             view.inserirPizzaView(pizza);
         } catch (Exception ex) {
             view.apresentaErro(ex.getLocalizedMessage());
@@ -111,7 +113,9 @@ public class PizzaController {
             pizza.setPrecoTotal(((pizza.getArea() * preco1) + (pizza.getArea() * preco2)) / 2);
 
             modelDao.atualizar(pizza);
+            view.atualizarTotal(modelDao.recalcTotal(pizza.getPedido()));
             view.atualizarPizza(pizza);
+
         } catch (Exception ex) {
             view.apresentaErro(ex.getMessage());
 //            view.apresentaErro("Erro ao atualizar pizza.");

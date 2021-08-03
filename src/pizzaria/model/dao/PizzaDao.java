@@ -18,9 +18,9 @@ public class PizzaDao {
     private final String delete = "delete from pizzas WHERE id=?";
     private final String selectIDSabor1 = "select tipo from sabores where id=?";
     private final String selectIDSabor2 = "select tipo from sabores where id=?";
-    private final String selectValorTipo = "select preco from tipo_pizza where id=?";/// HERE
-    private final String increaseOrderValue = "update pedidos set preco=preco + ? WHERE id=?";
-    private final String decreaseOrderValue = "update pedidos set preco=preco - ? WHERE id=?";
+    private final String selectValorTipo = "select preco from tipo_pizza where id=?";
+    private final String increaseOrderValue = "update pedidos set preco= ? WHERE id=?";
+    private final String setOrderValue = "update pedidos set preco=? WHERE id=?";
 
     public PizzaDao(ConnectionFactory conFactory) {
         this.connectionFactory = conFactory;
@@ -85,10 +85,39 @@ public class PizzaDao {
         }
     }
 
+    public Double recalcTotal(String id_pedido_selecionado) throws SQLException {
+        Connection connection = connectionFactory.getConnection();
+        ResultSet rs = null;
+        PreparedStatement stmtLista = connection.prepareStatement(select);
+        PreparedStatement stmtUpdate = connection.prepareStatement(setOrderValue);
+
+        try {
+            stmtLista.setString(1, id_pedido_selecionado);
+            rs = stmtLista.executeQuery();
+            double valorTotal = 0.0;
+            while (rs.next()) {
+
+                valorTotal = +rs.getDouble("preco");
+
+            }
+            stmtUpdate.setDouble(1, valorTotal);
+            stmtUpdate.setString(2, id_pedido_selecionado);
+            stmtUpdate.executeUpdate();
+            return valorTotal;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            rs.close();
+            stmtLista.close();
+        }
+    }
+
     public List<Pizza> getListaDoPedido(String idpedido) throws SQLException {
         Connection connection = connectionFactory.getConnection();
         ResultSet rs = null;
         PreparedStatement stmtLista = connection.prepareStatement(selectWhere);
+        PreparedStatement stmtAtualiza = connection.prepareStatement(update);
+
         try {
             stmtLista.setString(1, idpedido);
             rs = stmtLista.executeQuery();

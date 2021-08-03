@@ -45,7 +45,7 @@ public class PizzaFormularioView extends javax.swing.JPanel {
         btn_criarnovo = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        r_pedido_cm_quadrados = new javax.swing.JRadioButton();
+        r_pizza_cm_quadrados = new javax.swing.JRadioButton();
 
         c_tamanho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,10 +105,10 @@ public class PizzaFormularioView extends javax.swing.JPanel {
 
         jLabel1.setText("Tamanho:");
 
-        r_pedido_cm_quadrados.setText("Área em cm²");
-        r_pedido_cm_quadrados.addActionListener(new java.awt.event.ActionListener() {
+        r_pizza_cm_quadrados.setText("Área em cm²");
+        r_pizza_cm_quadrados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                r_pedido_cm_quadradosActionPerformed(evt);
+                r_pizza_cm_quadradosActionPerformed(evt);
             }
         });
 
@@ -154,7 +154,7 @@ public class PizzaFormularioView extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btn_criarnovo)
-                                    .addComponent(r_pedido_cm_quadrados))))
+                                    .addComponent(r_pizza_cm_quadrados))))
                         .addContainerGap(17, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
@@ -196,7 +196,7 @@ public class PizzaFormularioView extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(r_pizza_cm)
-                    .addComponent(r_pedido_cm_quadrados))
+                    .addComponent(r_pizza_cm_quadrados))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_atualizar)
@@ -207,6 +207,12 @@ public class PizzaFormularioView extends javax.swing.JPanel {
 
     private void r_pizza_cmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r_pizza_cmActionPerformed
         // TODO add your handling code here:
+
+        if (r_pizza_cm.isSelected()) {
+            r_pizza_cm_quadrados.setSelected(false);
+        } else {
+            r_pizza_cm_quadrados.setSelected(true);
+        }
     }//GEN-LAST:event_r_pizza_cmActionPerformed
 
     private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
@@ -221,9 +227,15 @@ public class PizzaFormularioView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_criarnovoActionPerformed
 
-    private void r_pedido_cm_quadradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r_pedido_cm_quadradosActionPerformed
+    private void r_pizza_cm_quadradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r_pizza_cm_quadradosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_r_pedido_cm_quadradosActionPerformed
+        if (r_pizza_cm_quadrados.isSelected()) {
+            r_pizza_cm.setSelected(false);
+        } else {
+            r_pizza_cm.setSelected(true);
+        }
+
+    }//GEN-LAST:event_r_pizza_cm_quadradosActionPerformed
 
     private void c_tamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c_tamanhoActionPerformed
         // TODO add your handling code here:
@@ -267,8 +279,8 @@ public class PizzaFormularioView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JRadioButton r_pedido_cm_quadrados;
     private javax.swing.JRadioButton r_pizza_cm;
+    private javax.swing.JRadioButton r_pizza_cm_quadrados;
     private javax.swing.JLabel text_valor_real;
     // End of variables declaration//GEN-END:variables
 
@@ -278,7 +290,7 @@ public class PizzaFormularioView extends javax.swing.JPanel {
         cbx_forma.setSelectedIndex(order.getNumberForma());
         cbx_sabor1.setSelectedItem(order.getSabor1());
         cbx_sabor2.setSelectedItem(order.getSabor2());
-        r_pedido_cm_quadrados.setSelected(!order.isIsMetricaCmQuadrado());
+        r_pizza_cm_quadrados.setSelected(!order.isIsMetricaCmQuadrado());
         r_pizza_cm.setSelected(order.isIsMetricaCmQuadrado());
         c_tamanho.setText(Double.toString(order.getLadoOuRaio()));
     }
@@ -293,6 +305,10 @@ public class PizzaFormularioView extends javax.swing.JPanel {
         pizzaSelecionadoParaAtualizacao.setLadoOuRaio(Double.parseDouble(c_tamanho.getText()));
         pizzaSelecionadoParaAtualizacao.setIsMetricaCmQuadrado(r_pizza_cm.isSelected());
         return pizzaSelecionadoParaAtualizacao;
+    }
+
+    public void setPrecoTotal(Double preco) {
+        text_valor_real.setText("R$" + Double.toString(preco));
     }
 
     public void setListaSabores() {
