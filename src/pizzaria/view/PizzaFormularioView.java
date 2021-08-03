@@ -290,8 +290,14 @@ public class PizzaFormularioView extends javax.swing.JPanel {
         cbx_forma.setSelectedIndex(order.getNumberForma());
         cbx_sabor1.setSelectedItem(order.getSabor1());
         cbx_sabor2.setSelectedItem(order.getSabor2());
-        r_pizza_cm_quadrados.setSelected(!order.isIsMetricaCmQuadrado());
-        r_pizza_cm.setSelected(order.isIsMetricaCmQuadrado());
+        if (order.isIsMetricaCmQuadrado()) {
+            r_pizza_cm.setSelected(true);
+            r_pizza_cm_quadrados.setSelected(false);
+
+        } else {
+            r_pizza_cm.setSelected(false);
+            r_pizza_cm_quadrados.setSelected(true);
+        }
         c_tamanho.setText(Double.toString(order.getLadoOuRaio()));
     }
 
