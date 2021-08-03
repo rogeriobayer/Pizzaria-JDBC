@@ -306,6 +306,10 @@ public class TelaCliente extends javax.swing.JFrame {
         clienteFormFilter.cleanQuery();
     }
 
+    public void cleanFields() {
+        formularioCliente.cleanFields();
+    }
+
     public void apresentaInfo(String info) {
         JOptionPane.showMessageDialog(null, info + "\n", "Informação", JOptionPane.INFORMATION_MESSAGE);
     }
