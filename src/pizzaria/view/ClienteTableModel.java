@@ -45,9 +45,7 @@ public class ClienteTableModel extends AbstractTableModel {
     @Override
     public boolean isCellEditable(int row, int column) {
         return false;
-        //if(column==0)
-        //    return false;
-        //return true;
+
     }
 
     @Override
@@ -62,8 +60,6 @@ public class ClienteTableModel extends AbstractTableModel {
                 return customer.getSobrenome();//if column 2 (birthday)
             case 3:
                 return customer.getTelefone();
-//            case 4:
-//                return customer.getEndereco();
             default:
                 return null;
         }
@@ -85,9 +81,6 @@ public class ClienteTableModel extends AbstractTableModel {
             case 3:
                 customer.setTelefone((String) value);
                 break;
-//            case 4:
-//                customer.setEndereco((String) value);
-//                break;
             default:
         }
         this.fireTableCellUpdated(row, col);

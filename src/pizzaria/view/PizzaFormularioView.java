@@ -238,6 +238,8 @@ public class PizzaFormularioView extends javax.swing.JPanel {
     }
 
     public JComboBox getCampoForma() {
+        System.out.print(cbx_forma.getSelectedIndex());
+
         return cbx_forma;
     }
 

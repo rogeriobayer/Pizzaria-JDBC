@@ -12,7 +12,7 @@ public class PizzaDao {
 
     private ConnectionFactory connectionFactory;
     private final String insert = "insert into pizzas (id,id_pedido, forma, centimetro_quadrado, area, raio, id_sabor1, id_sabor2, preco) values (?,?,?,?,?,?,?,?,?)";
-    private final String select = "select * from pizzas";
+    private final String select = "select * from pizzas where id_pedido =?";
     private final String selectWhere = "select * from pizzas where id =?";
     private final String update = "update pizzas set forma=?, centimetro_quadrado=?, area=?, raio=?, id_sabor1=?, id_sabor2=?, preco=? WHERE id=?";
     private final String delete = "delete from pizzas WHERE id=?";
@@ -54,11 +54,12 @@ public class PizzaDao {
         }
     }
 
-    public List<Pizza> getLista() throws SQLException {
+    public List<Pizza> getLista(String id_pedido_selecionado) throws SQLException {
         Connection connection = connectionFactory.getConnection();
         ResultSet rs = null;
         PreparedStatement stmtLista = connection.prepareStatement(select);
         try {
+            stmtLista.setString(1, id_pedido_selecionado);
             rs = stmtLista.executeQuery();
             List<Pizza> pizzas = new ArrayList();
             while (rs.next()) {

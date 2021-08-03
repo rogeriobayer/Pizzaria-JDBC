@@ -136,11 +136,15 @@ public class PizzaController {
 
     public void listarPizza() {
         try {
-
-            List<Pizza> lista = this.modelDao.getLista();
+            List<Pizza> lista = this.modelDao.getLista(view.getPedidoSelecionado());
+            if (lista == null || lista.isEmpty()) {
+                view.apresentaInfo("Não há pizzas nesse pedido");
+                return;
+            }
+            System.out.print(lista);
             view.mostrarListaPizzas(lista);
         } catch (Exception ex) {
-            view.apresentaErro(ex.toString());
+            view.apresentaErro(ex.getLocalizedMessage());
 
 //            view.apresentaErro("Erro ao listar pedidos.");
         }

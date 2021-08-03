@@ -26,6 +26,6 @@ public class Circulo extends Forma {
 
     @Override
     public Integer getNumberForma() {
-        return 1;
+        return 0;
     }
 }
