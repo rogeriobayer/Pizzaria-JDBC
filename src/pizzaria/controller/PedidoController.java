@@ -68,7 +68,7 @@ public class PedidoController {
     public void excluirPedido() {
         try {
             List<Pedido> listaParaExcluir = viewPedidos.getPedidosParaExcluir();
-            if (listaParaExcluir == null) {
+            if (listaParaExcluir == null || listaParaExcluir.isEmpty()) {
                 view.apresentaInfo("Selecione pelo menos um pedido na tabela para excluir.");
                 return;
             }

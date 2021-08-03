@@ -94,6 +94,10 @@ public class PizzaController {
     public void excluirPizza() {
         try {
             List<Pizza> listaParaExcluir = view.getPizzasParaExcluir();
+            if (listaParaExcluir == null || listaParaExcluir.equals("null") || listaParaExcluir.isEmpty()) {
+                viewPedidos.apresentaInfo("Selecione um pedido para excluir.");
+                return;
+            }
             modelDao.excluirLista(listaParaExcluir);
             view.excluirPizzasView(listaParaExcluir);
         } catch (Exception ex) {
@@ -119,7 +123,7 @@ public class PizzaController {
         try {
             Pedido pedido = viewPedidos.getPedidoSelecionado();
             if (pedido == null || pedido.equals("null")) {
-                viewPedidos.apresentaInfo("Selecione um pedido.");
+                viewPedidos.apresentaInfo("Selecione um pedido para atualizar.");
                 return;
             }
             String cliente = viewPedidos.getClienteSelecionado();

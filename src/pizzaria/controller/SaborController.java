@@ -27,9 +27,8 @@ public class SaborController {
             modelDao.inserir(sabor);
             view.inserirSaborView(sabor);
         } catch (Exception ex) {
-            view.apresentaErro(ex.toString());
 
-//            view.apresentaErro("Erro ao criar sabor.");
+            view.apresentaErro("Erro ao criar sabor.");
         }
     }
 
@@ -45,8 +44,6 @@ public class SaborController {
             view.atualizarSabor(sabor);
 
         } catch (Exception ex) {
-//            view.apresentaErro(ex.getMessage());
-
             view.apresentaErro("Erro ao atualizar sabor.");
         }
     }
