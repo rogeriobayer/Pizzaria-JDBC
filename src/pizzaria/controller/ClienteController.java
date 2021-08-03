@@ -67,7 +67,6 @@ public class ClienteController {
     public void excluirCliente() {
         try {
             List<Cliente> listaParaExcluir = view.getClientesParaExcluir();
-            System.out.print(listaParaExcluir);
             if (listaParaExcluir == null || listaParaExcluir.equals("null") || listaParaExcluir.isEmpty()) {
                 view.apresentaInfo("Selecione um cliente na tabela para excluir.");
                 return;
