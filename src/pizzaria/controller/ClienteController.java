@@ -76,7 +76,9 @@ public class ClienteController {
             view.excluirClientesView(listaParaExcluir);
             view.cleanFields();
         } catch (Exception ex) {
-            view.apresentaErro("Erro ao excluir clientes.");
+            view.apresentaErro(ex.toString());
+
+            view.apresentaErro("Erro ao excluir clientes. O cliente possui pedidos no sistema.");
         }
     }
 

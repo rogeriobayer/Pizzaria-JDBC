@@ -34,7 +34,6 @@ public class ClienteDao {
             stmtAdiciona.setString(4, cliente.getTelefone());
             stmtAdiciona.execute();
 
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -50,16 +49,10 @@ public class ClienteDao {
             rs = stmtLista.executeQuery();
             List<Cliente> clientes = new ArrayList();
             while (rs.next()) {
-                // criando o objeto Cliente
-                //Cliente cliente = new Cliente();
                 String id = rs.getString("id");
                 String nome = rs.getString("nome");
                 String sobrenome = rs.getString("sobrenome");
                 String telefone = rs.getString("telefone");
-//                LocalDate dataNascimento = rs.getDate("dataNascimento").toLocalDate();
-//                Array pedidosArray = rs.getArray("pedidosArray");
-
-                // adicionando o objeto à lista
                 clientes.add(new Cliente(id, nome, sobrenome, telefone));
             }
 
@@ -83,16 +76,11 @@ public class ClienteDao {
             rs = stmtFilter.executeQuery();
             List<Cliente> clientes = new ArrayList();
             while (rs.next()) {
-                // criando o objeto Cliente
-                //Cliente cliente = new Cliente();
                 String id = rs.getString("id");
                 String nome = rs.getString("nome");
                 String sobrenome = rs.getString("sobrenome");
                 String telefone = rs.getString("telefone");
-//                LocalDate dataNascimento = rs.getDate("dataNascimento").toLocalDate();
-//                Array pedidosArray = rs.getArray("pedidosArray");
 
-                // adicionando o objeto à lista
                 clientes.add(new Cliente(id, nome, sobrenome, telefone));
             }
 
@@ -115,8 +103,7 @@ public class ClienteDao {
             stmtAtualiza.setString(2, cliente.getNome());
             stmtAtualiza.setString(3, cliente.getSobrenome());
             stmtAtualiza.setString(4, cliente.getTelefone());
-//            stmtAtualiza.setArray(5, cliente.getArray());
-//            stmtAtualiza.setLong(5, cliente.getId());
+
             stmtAtualiza.executeUpdate();
         } finally {
             stmtAtualiza.close();
@@ -133,6 +120,8 @@ public class ClienteDao {
     public void excluir(Cliente cliente) throws SQLException {
         Connection connection = connectionFactory.getConnection();
         PreparedStatement stmtExcluir;
+        PedidoDao pedidoDao = new PedidoDao(connectionFactory);
+        pedidoDao.excluirPorCliente(cliente.getId());
         stmtExcluir = connection.prepareStatement(delete);
         try {
             stmtExcluir.setString(1, cliente.getId());

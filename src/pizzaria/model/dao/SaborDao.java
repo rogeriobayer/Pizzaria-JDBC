@@ -1,6 +1,5 @@
 package pizzaria.model.dao;
 
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +10,6 @@ import java.util.List;
 import pizzaria.model.Sabor;
 
 public class SaborDao {
-// a conexão com o banco de dados
 
     private ConnectionFactory connectionFactory;
     private final String insert = "insert into sabores (id, nome,tipo) values (?,?,?)";
@@ -29,20 +27,13 @@ public class SaborDao {
     public void inserir(Sabor sabor) {
         Connection connection = connectionFactory.getConnection();
         try {
-            // prepared statement para inserção
             PreparedStatement stmtAdiciona = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            // seta os valores
+
             stmtAdiciona.setString(1, sabor.getId());
             stmtAdiciona.setString(2, sabor.getNome());
             stmtAdiciona.setInt(3, sabor.getTipo());
-//            stmtAdiciona.setArray(5, sabor.getArray());
-            // executa
+
             stmtAdiciona.execute();
-            //Seta o id do sabor
-//            ResultSet rs = stmtAdiciona.getGeneratedKeys();
-//            rs.next();
-//            long i = rs.getLong(1);
-//            sabor.setId(i);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -57,15 +48,9 @@ public class SaborDao {
             rs = stmtLista.executeQuery();
             List<Sabor> sabores = new ArrayList();
             while (rs.next()) {
-                // criando o objeto Sabor
-                //Sabor sabor = new Sabor();
                 String id = rs.getString("id");
                 String nome = rs.getString("nome");
                 Integer tipo = rs.getInt("tipo");
-//                LocalDate dataNascimento = rs.getDate("dataNascimento").toLocalDate();
-//                Array pedidosArray = rs.getArray("pedidosArray");
-
-                // adicionando o objeto à lista
                 sabores.add(new Sabor(id, nome, tipo));
             }
 
@@ -88,12 +73,9 @@ public class SaborDao {
             rs = stmtFilter.executeQuery();
             List<Sabor> sabores = new ArrayList();
             while (rs.next()) {
-
                 String id = rs.getString("id");
                 String nome = rs.getString("nome");
                 Integer tipo = rs.getInt("tipo");
-                String telefone = rs.getString("telefone");
-
                 sabores.add(new Sabor(id, nome, tipo));
             }
 
@@ -118,7 +100,6 @@ public class SaborDao {
         } finally {
             stmtAtualiza.close();
         }
-
     }
 
     public void excluirLista(List<Sabor> sabores) throws SQLException {

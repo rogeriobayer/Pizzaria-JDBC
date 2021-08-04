@@ -91,6 +91,29 @@ public class PedidoDao {
 
     }
 
+    public void excluirPorCliente(String id_cliente) throws SQLException {
+        Connection connection = connectionFactory.getConnection();
+        PizzaDao pizzaDao = new PizzaDao(connectionFactory);
+        ResultSet rs = null;
+        PreparedStatement stmtLista = connection.prepareStatement(selectWhere);
+        try {
+            stmtLista.setString(1, id_cliente);
+            rs = stmtLista.executeQuery();
+            while (rs.next()) {
+                String id = rs.getString("id");
+                pizzaDao.excludeByOrderId(id);
+                excludeById(id);
+            }
+            return;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            rs.close();
+            stmtLista.close();
+        }
+
+    }
+
     public void atualizar(Pedido pedido) throws SQLException {
         Connection connection = connectionFactory.getConnection();
         PreparedStatement stmtAtualiza = connection.prepareStatement(update);
@@ -118,6 +141,18 @@ public class PedidoDao {
         stmtExcluir = connection.prepareStatement(delete);
         try {
             stmtExcluir.setString(1, pedido.getId());
+            stmtExcluir.executeUpdate();
+        } finally {
+            stmtExcluir.close();
+        }
+    }
+
+    public void excludeById(String id_pedido) throws SQLException {
+        Connection connection = connectionFactory.getConnection();
+        PreparedStatement stmtExcluir;
+        stmtExcluir = connection.prepareStatement(delete);
+        try {
+            stmtExcluir.setString(1, id_pedido);
             stmtExcluir.executeUpdate();
         } finally {
             stmtExcluir.close();
