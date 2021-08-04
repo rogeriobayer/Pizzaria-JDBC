@@ -192,7 +192,6 @@ public class ClienteFormularioView extends javax.swing.JPanel {
         this.btn_cliente_novo.addActionListener(e -> controller.criarCliente());
         this.btn_cliente_atualizar.addActionListener(e -> controller.atualizarCliente());
         this.btn_cliente_excluir.addActionListener(e -> controller.excluirCliente());
-//        this.btn_cliente_listar.addActionListener(e -> controller.listarCliente());
     }
 
 }

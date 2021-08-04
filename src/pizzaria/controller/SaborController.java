@@ -30,6 +30,7 @@ public class SaborController {
             }
             modelDao.inserir(sabor);
             view.inserirSaborView(sabor);
+            view.cleanFlavorsFields();
         } catch (Exception ex) {
 
             view.apresentaErro("Erro ao criar sabor.");
@@ -38,7 +39,6 @@ public class SaborController {
 
     public void atualizarSabor() {
         try {
-
             Sabor sabor = view.getSaborParaAtualizar();
             if (sabor == null || sabor.getNome().isEmpty()) {
                 view.apresentaInfo("Selecione um sabor na tabela para atualizar.");
@@ -46,7 +46,7 @@ public class SaborController {
             }
             modelDao.atualizar(sabor);
             view.atualizarSabor(sabor);
-
+            view.cleanFlavorsFields();
         } catch (Exception ex) {
             view.apresentaErro("Erro ao atualizar sabor.");
         }
@@ -55,6 +55,10 @@ public class SaborController {
     public void excluirSabor() {
         try {
             List<Sabor> listaParaExcluir = view.getSaboresParaExcluir();
+            if (listaParaExcluir == null || listaParaExcluir.isEmpty()) {
+                view.apresentaInfo("Selecione um sabor na tabela para excluir.");
+                return;
+            }
             modelDao.excluirLista(listaParaExcluir);
             view.excluirSaboresView(listaParaExcluir);
         } catch (Exception ex) {
@@ -70,20 +74,4 @@ public class SaborController {
             view.apresentaErro("Erro ao listar sabores.");
         }
     }
-
-    public void filtrarSabores() {
-        try {
-
-            String query = view.getQueryParaFiltrar();
-            List<Sabor> lista = this.modelDao.getListaFiltrada(query);
-
-            view.mostrarListaSabores(lista);
-
-            view.cleanFilterQuery();
-        } catch (Exception ex) {
-//
-            view.apresentaErro("Erro ao filtrar sabores.");
-        }
-    }
-
 }

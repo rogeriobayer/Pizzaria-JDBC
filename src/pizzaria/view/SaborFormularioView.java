@@ -1,21 +1,14 @@
 package pizzaria.view;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
-import pizzaria.controller.ClienteController;
 import pizzaria.controller.SaborController;
-import pizzaria.model.Cliente;
 import pizzaria.model.Sabor;
 
 public class SaborFormularioView extends javax.swing.JPanel {
 
     private Sabor saborSelecionadoParaAtualizacao;
 
-    /**
-     * Creates new form FormularioClienteView
-     */
     public SaborFormularioView() {
         initComponents();
     }
@@ -133,7 +126,6 @@ public class SaborFormularioView extends javax.swing.JPanel {
         this.saborSelecionadoParaAtualizacao = cliente;
         cbx_tipo_sabor.setSelectedIndex(cliente.getTipo());
         c_sabor_nome.setText(cliente.getNome());
-
     }
 
     public Sabor getSaborParaAtualizar() {
@@ -145,12 +137,16 @@ public class SaborFormularioView extends javax.swing.JPanel {
         return saborSelecionadoParaAtualizacao;
     }
 
+    public void cleanFields() {
+        c_sabor_nome.setText(null);
+        cbx_tipo_sabor.setSelectedIndex(0);
+    }
+
     public void setController(SaborController controller) {
 
         this.btn_sabor_novo.addActionListener(e -> controller.criarSabor());
         this.btn_sabor_atualizar.addActionListener(e -> controller.atualizarSabor());
         this.btn_sabor_excluir.addActionListener(e -> controller.excluirSabor());
-//        this.btn_cliente_listar.addActionListener(e -> controller.listarCliente());
     }
 
 }
