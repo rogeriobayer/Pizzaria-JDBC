@@ -37,20 +37,8 @@ public class PedidoController {
         this.viewPedidos.initPedidosView();
     }
 
-//    public void criarPedido() { //TELA PEDIDO;
-//        try {
-//            Pedido pedido = view.getPedidoFormulario();
-//            modelDao.inserir(pedido);
-//            view.inserirPedidoView(pedido);
-//        } catch (Exception ex) {
-//            view.apresentaErro(ex.toString());
-//
-////            view.apresentaErro("Erro ao criar pedido.");
-//        }
-//    }
     public void atualizarPedido() {
         try {
-
             Pedido pedido = view.getPedidoParaAtualizar();
             if (pedido == null) {
                 view.apresentaInfo("Selecione um pedido na tabela para atualizar.");
@@ -58,7 +46,6 @@ public class PedidoController {
             }
             modelDao.atualizar(pedido);
             view.atualizarPedido(pedido);
-
         } catch (Exception ex) {
             view.apresentaErro(ex.getMessage());
             view.apresentaErro("Erro ao atualizar pedido.");
@@ -69,13 +56,13 @@ public class PedidoController {
         try {
             List<Pedido> listaParaExcluir = viewPedidos.getPedidosParaExcluir();
             if (listaParaExcluir == null || listaParaExcluir.isEmpty()) {
-                view.apresentaInfo("Selecione pelo menos um pedido na tabela para excluir.");
+                viewPedidos.apresentaInfo("Selecione pelo menos um pedido na tabela para excluir.");
                 return;
             }
             modelDao.excluirLista(listaParaExcluir);
             viewPedidos.excluirPedidosView(listaParaExcluir);
         } catch (Exception ex) {
-            view.apresentaErro("Erro ao excluir clientes.");
+            viewPedidos.apresentaErro("Erro ao excluir clientes.");
         }
     }
 
@@ -84,8 +71,6 @@ public class PedidoController {
             List<Pedido> lista = this.modelDao.getLista();
             view.mostrarListaPedidos(lista);
         } catch (Exception ex) {
-            //            view.apresentaErro(ex.toString());
-//            ;;
             view.apresentaErro("Erro ao listar pedidos.");
         }
     }
@@ -96,8 +81,7 @@ public class PedidoController {
             );
             viewPedidos.mostrarListaPedidos(lista);
         } catch (Exception ex) {
-            //            view.apresentaErro(ex.toString());
-            view.apresentaErro("Erro ao listar pedidos.");
+            viewPedidos.apresentaErro("Erro ao listar pedidos.");
         }
     }
 
@@ -114,8 +98,6 @@ public class PedidoController {
             PizzaDao pizzaDao = new PizzaDao(new ConnectionFactory());
             PizzaController pizzaController = new PizzaController(viewPedidos, pizzaDao);
             viewPedidos.setVisible(true);
-//            List<Cliente> lista = this.modelDao.getLista();
-//            view.mostrarListaClientes(lista);
         } catch (Exception ex) {
             view.apresentaErro("Erro ao abrir a tela Novo Pedido.");
         }
@@ -124,9 +106,6 @@ public class PedidoController {
     public void fecharNovoPedido() {
         try {
             viewPedidos.setVisible(false);
-
-//            List<Cliente> lista = this.modelDao.getLista();
-//            view.mostrarListaClientes(lista);
         } catch (Exception ex) {
             view.apresentaErro("Erro ao listar clientes.");
         }

@@ -1,5 +1,7 @@
 package pizzaria.model.dao;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -96,11 +98,11 @@ public class PizzaDao {
             rs = stmtLista.executeQuery();
             double valorTotal = 0.0;
             while (rs.next()) {
-
-                valorTotal = +rs.getDouble("preco");
-
+                valorTotal = valorTotal + rs.getDouble("preco");
             }
-            stmtUpdate.setDouble(1, valorTotal);
+            BigDecimal bd = new BigDecimal(valorTotal).setScale(2, RoundingMode.HALF_UP);
+            Double parsedPrice = bd.doubleValue();
+            stmtUpdate.setDouble(1, parsedPrice);
             stmtUpdate.setString(2, id_pedido_selecionado);
             stmtUpdate.executeUpdate();
             return valorTotal;

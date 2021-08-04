@@ -60,9 +60,7 @@ public class ClienteController {
             view.atualizarCliente(cliente);
             view.cleanFields();
         } catch (Exception ex) {
-            view.apresentaErro(ex.getMessage());
-
-//            view.apresentaErro("Erro ao atualizar cliente.");
+            view.apresentaErro("Erro ao atualizar cliente.");
         }
     }
 
