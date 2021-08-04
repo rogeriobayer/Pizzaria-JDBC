@@ -181,6 +181,12 @@ public class ClienteFormularioView extends javax.swing.JPanel {
         return clienteSelecionadoParaAtualizacao;
     }
 
+    public void cleanFields() {
+        c_cliente_sobrenome.setText(null);
+        c_cliente_nome.setText(null);
+        c_cliente_telefone.setText(null);
+    }
+
     public void setController(ClienteController controller) {
 
         this.btn_cliente_novo.addActionListener(e -> controller.criarCliente());

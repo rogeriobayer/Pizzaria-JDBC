@@ -1,16 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pizzaria.controller;
 
 import java.util.List;
-import static javax.swing.JOptionPane.showMessageDialog;
 import pizzaria.model.Cliente;
 import pizzaria.model.dao.ClienteDao;
-import pizzaria.model.dao.ConnectionFactory;
-import pizzaria.model.dao.PedidoDao;
 import pizzaria.view.TelaCliente;
 
 public class ClienteController {
@@ -49,6 +41,8 @@ public class ClienteController {
             }
             modelDao.inserir(cliente);
             view.inserirClienteView(cliente);
+            view.cleanFields();
+
         } catch (Exception ex) {
             view.apresentaErro("Erro ao criar cliente. Verifique se o telefone já foi utilizado.");
         }
@@ -64,7 +58,7 @@ public class ClienteController {
             }
             modelDao.atualizar(cliente);
             view.atualizarCliente(cliente);
-
+            view.cleanFields();
         } catch (Exception ex) {
             view.apresentaErro(ex.getMessage());
 
@@ -82,6 +76,7 @@ public class ClienteController {
             }
             modelDao.excluirLista(listaParaExcluir);
             view.excluirClientesView(listaParaExcluir);
+            view.cleanFields();
         } catch (Exception ex) {
             view.apresentaErro("Erro ao excluir clientes.");
         }
@@ -98,12 +93,9 @@ public class ClienteController {
 
     public void filtrarClientes() {
         try {
-
             String query = view.getQueryParaFiltrar();
             List<Cliente> lista = this.modelDao.getListaFiltrada(query);
-
             view.mostrarListaClientes(lista);
-
             view.cleanFilterQuery();
         } catch (Exception ex) {
             view.apresentaErro("Erro ao filtrar clientes.");
