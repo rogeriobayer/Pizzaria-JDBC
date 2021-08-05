@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pizzaria.view;
 
 import java.util.ArrayList;
@@ -10,10 +5,6 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import pizzaria.model.Cliente;
 
-/**
- *
- * @author tomat
- */
 public class ClienteTableModel extends AbstractTableModel {
 
     private String[] colunas = new String[]{"id", "Nome", "Sobrenome", "Telefone"};
@@ -53,11 +44,11 @@ public class ClienteTableModel extends AbstractTableModel {
         Cliente customer = lista.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return customer.getId();//if column 0 (code)
+                return customer.getId();
             case 1:
-                return customer.getNome();//if column 1 (name)
+                return customer.getNome();
             case 2:
-                return customer.getSobrenome();//if column 2 (birthday)
+                return customer.getSobrenome();
             case 3:
                 return customer.getTelefone();
             default:
@@ -70,7 +61,7 @@ public class ClienteTableModel extends AbstractTableModel {
         Cliente customer = lista.get(row);
         switch (col) {
             case 0:
-                customer.setId((String) value); //if column 0 (code)
+                customer.setId((String) value);
                 break;
             case 1:
                 customer.setNome((String) value);
@@ -89,20 +80,18 @@ public class ClienteTableModel extends AbstractTableModel {
     public boolean removeCliente(Cliente customer) {
         int linha = this.lista.indexOf(customer);
         boolean result = this.lista.remove(customer);
-        this.fireTableRowsDeleted(linha, linha);//update JTable
+        this.fireTableRowsDeleted(linha, linha);
         return result;
     }
 
     public void adicionaCliente(Cliente customer) {
         this.lista.add(customer);
-        //this.fireTableDataChanged();
-        this.fireTableRowsInserted(lista.size() - 1, lista.size() - 1);//update JTable
+        this.fireTableRowsInserted(lista.size() - 1, lista.size() - 1);
     }
 
     public void setListaClientes(List<Cliente> customer) {
         this.lista = customer;
         this.fireTableDataChanged();
-        //this.fireTableRowsInserted(0,contatos.size()-1);//update JTable
     }
 
     public void limpaTabela() {
@@ -111,7 +100,7 @@ public class ClienteTableModel extends AbstractTableModel {
             indice = 0;
         }
         this.lista = new ArrayList();
-        this.fireTableRowsDeleted(0, indice);//update JTable
+        this.fireTableRowsDeleted(0, indice);
     }
 
     public Cliente getCliente(int linha) {

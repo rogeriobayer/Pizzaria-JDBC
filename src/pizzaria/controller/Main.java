@@ -5,12 +5,12 @@ import pizzaria.model.dao.ClienteDao;
 import pizzaria.model.dao.PedidoDao;
 import pizzaria.model.dao.SaborDao;
 import pizzaria.model.dao.TipoDao;
-import pizzaria.view.TelaCliente;
+import pizzaria.view.TelaPrincipal;
 
 public class Main {
 
     public static void main(String[] args) {
-        TelaCliente view = new TelaCliente();
+        TelaPrincipal view = new TelaPrincipal();
         ClienteDao modelDao = new ClienteDao(new ConnectionFactory());
         ClienteController controller = new ClienteController(view, modelDao);
         SaborDao saborDao = new SaborDao(new ConnectionFactory());

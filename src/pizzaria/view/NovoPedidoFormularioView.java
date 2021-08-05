@@ -1,9 +1,5 @@
 package pizzaria.view;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import javax.swing.JTextField;
-import pizzaria.controller.ClienteController;
 import pizzaria.controller.PedidoController;
 import pizzaria.controller.PizzaController;
 import pizzaria.model.Cliente;

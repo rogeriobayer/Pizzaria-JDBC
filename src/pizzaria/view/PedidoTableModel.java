@@ -92,14 +92,12 @@ public class PedidoTableModel extends AbstractTableModel {
 
     public void adicionaPedido(Pedido order) {
         this.lista.add(order);
-        //this.fireTableDataChanged();
         this.fireTableRowsInserted(lista.size() - 1, lista.size() - 1);
     }
 
     public void setListaPedidos(List<Pedido> order) {
         this.lista = order;
         this.fireTableDataChanged();
-        //this.fireTableRowsInserted(0,contatos.size()-1);
     }
 
     public void limpaTabela() {

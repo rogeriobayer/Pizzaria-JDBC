@@ -3,10 +3,6 @@ package pizzaria.view;
 import javax.swing.JTable;
 import pizzaria.controller.SaborController;
 
-/**
- *
- * @author tomat
- */
 public class SaborTabelaView extends javax.swing.JPanel {
 
     public SaborTabelaView() {

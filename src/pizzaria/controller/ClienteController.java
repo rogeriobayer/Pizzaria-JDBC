@@ -3,14 +3,14 @@ package pizzaria.controller;
 import java.util.List;
 import pizzaria.model.Cliente;
 import pizzaria.model.dao.ClienteDao;
-import pizzaria.view.TelaCliente;
+import pizzaria.view.TelaPrincipal;
 
 public class ClienteController {
 
-    private TelaCliente view;
+    private TelaPrincipal view;
     private ClienteDao modelDao;
 
-    public ClienteController(TelaCliente view, ClienteDao modelDao) {
+    public ClienteController(TelaPrincipal view, ClienteDao modelDao) {
         this.view = view;
         this.modelDao = modelDao;
         initController();
