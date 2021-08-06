@@ -9,17 +9,6 @@ CREATE TABLE clientes (
   UNIQUE KEY clientes_UN (telefone)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-
--- DDL sabores 
-
-CREATE TABLE sabores (
-  id varchar(100) NOT NULL,
-  nome varchar(100) NOT NULL,
-  tipo int NOT NULL,
-  PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-
 -- DDL tipo_pizza 
 
 CREATE TABLE tipo_pizza (
@@ -28,6 +17,18 @@ CREATE TABLE tipo_pizza (
   preco double NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--sabores definition
+
+CREATE TABLE sabores (
+  id varchar(100) NOT NULL,
+  nome varchar(100) NOT NULL,
+  tipo int NOT NULL,
+  PRIMARY KEY (id),
+  KEY sabores_FK (tipo),
+  CONSTRAINT sabores_FK FOREIGN KEY (tipo) REFERENCES tipo_pizza (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 
 -- DDL pedidos 

@@ -15,7 +15,7 @@ public class ClienteDao {
     private ConnectionFactory connectionFactory;
     private final String insert = "insert into clientes (id, nome,sobrenome,telefone) values (?,?,?,?)";
     private final String select = "select * from clientes";
-    private final String update = "update clientes set nome=?, telefone=?, sobrenome=?WHERE id=?";
+    private final String update = "update clientes set nome=?,  sobrenome=?, telefone=?WHERE id=?";
     private final String delete = "delete from clientes WHERE id=?";
     private final String search = "SELECT * FROM clientes WHERE nome LIKE ? OR sobrenome LIKE ? OR telefone LIKE ?";
     private final String phone = "SELECT telefone FROM clientes WHERE id = ?";
@@ -98,11 +98,11 @@ public class ClienteDao {
         Connection connection = connectionFactory.getConnection();
         PreparedStatement stmtAtualiza = connection.prepareStatement(update);
         try {
-            stmtAtualiza.setString(1, cliente.getId());
 
-            stmtAtualiza.setString(2, cliente.getNome());
-            stmtAtualiza.setString(3, cliente.getSobrenome());
-            stmtAtualiza.setString(4, cliente.getTelefone());
+            stmtAtualiza.setString(1, cliente.getNome());
+            stmtAtualiza.setString(2, cliente.getSobrenome());
+            stmtAtualiza.setString(3, cliente.getTelefone());
+            stmtAtualiza.setString(4, cliente.getId());
 
             stmtAtualiza.executeUpdate();
         } finally {

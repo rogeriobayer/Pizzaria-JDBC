@@ -48,6 +48,8 @@ public class SaborController {
             view.atualizarSabor(sabor);
             view.cleanFlavorsFields();
         } catch (Exception ex) {
+            view.apresentaErro(ex.toString());
+
             view.apresentaErro("Erro ao atualizar sabor.");
         }
     }
