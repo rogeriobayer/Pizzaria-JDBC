@@ -14,7 +14,7 @@ public class SaborDao {
     private ConnectionFactory connectionFactory;
     private final String insert = "insert into sabores (id, nome,tipo) values (?,?,?)";
     private final String select = "select * from sabores";
-    private final String update = "update sabores set nome=?, tipo=?WHERE id=?";
+    private final String update = "update sabores set nome=?, tipo=? WHERE id=?";
     private final String delete = "delete from sabores WHERE id=?";
     private final String search = "SELECT * FROM sabores WHERE nome LIKE ? OR tipo LIKE ?";
 
@@ -93,9 +93,9 @@ public class SaborDao {
         Connection connection = connectionFactory.getConnection();
         PreparedStatement stmtAtualiza = connection.prepareStatement(update);
         try {
-            stmtAtualiza.setString(1, sabor.getId());
-            stmtAtualiza.setString(2, sabor.getNome());
-            stmtAtualiza.setInt(3, sabor.getTipo());
+            stmtAtualiza.setString(1, sabor.getNome());
+            stmtAtualiza.setInt(2, sabor.getTipo());
+            stmtAtualiza.setString(3, sabor.getId());
             stmtAtualiza.executeUpdate();
         } finally {
             stmtAtualiza.close();

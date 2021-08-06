@@ -12,37 +12,7 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/model/dao/SaborDao.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/model/Triangulo.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/controller/Main.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/view/NovaPizzaTableModel.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/model/dao/PizzaDao.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/controller/TipoController.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/view/ClienteTabelaView.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/model/dao/ClienteDao.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/view/ClienteFormularioPedidoView.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/controller/SaborController.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/view/PedidoFormularioView.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/model/Pizza.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/model/dao/ConnectionFactory.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/view/NovaPizzaTabelaView.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/controller/PizzaController.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/view/ClienteTableModel.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/view/TelaNovasPizzas.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/view/NovoPedidoFormularioView.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/model/Quadrado.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/view/TipoFormularioView.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/model/Pedido.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/view/TelaNovosPedidos.java</file>
             <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/controller/ClienteController.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/view/SaborTabelaView.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/model/Sabor.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/model/Circulo.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/view/TelaCliente.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/view/PizzaFormularioView.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/controller/PedidoController.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/view/PedidoTabelaView.java</file>
-            <file>file:/D:/Desktop/TADS%204/LPOO2/PizzariaSQL/src/pizzaria/model/dao/PedidoDao.java</file>
         </group>
     </open-files>
 </project-private>
